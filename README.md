@@ -1,6 +1,6 @@
-# Airline Reservation System
+# CryptoTrader
 
-### Simple way to reserve tickets for your favourite airlines.
+### Your one-stop cryptocurrency trading app.
 ***
 A *bulleted* list:
 - item 1
