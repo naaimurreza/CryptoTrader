@@ -1,7 +1,7 @@
-# My Personal Project
+# Airline Reservation System
 
-## A subtitle
-
+### Simple way to reserve tickets for your favourite airlines.
+***
 A *bulleted* list:
 - item 1
 - item 2
