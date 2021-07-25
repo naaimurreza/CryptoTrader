@@ -1,17 +1,17 @@
-//package ui;
-//
-//import exceptions.InsufficientBalanceException;
-//import exceptions.InvalidAmountException;
-//import exceptions.InvalidSelectionException;
-//import model.Cryptocurrency;
-//import model.Profile;
-//
-//import java.util.Scanner;
-//
-///*
-//  Represents a CryptoTrader game
-// */
-//public class CryptoTrader {
+package ui;
+
+import exceptions.InsufficientBalanceException;
+import exceptions.InvalidAmountException;
+import exceptions.InvalidSelectionException;
+import model.Cryptocurrency;
+import model.Profile;
+
+import java.util.Scanner;
+
+/*
+  Represents a CryptoTrader game
+ */
+public class CryptoTrader {
 //    private Profile profile;
 //
 //    boolean quit = false;
@@ -30,7 +30,7 @@
 //    }
 //
 //    // MODIFIES: this
-//    // EFFECTS: Displays welcome message and asks for user name and initial balance to instantiate a new Profile object.
+//    // EFFECTS: Displays welcome message and asks for user name and initial balance to instantiate a new Profile obje
 //    //          runs the CryptoTrader UI.
 //    public void runProfileUI() {
 //        System.out.println("Welcome To CryptoTrader©!");
@@ -239,5 +239,5 @@
 //        }
 //    }
 //
-//
-//}
+
+}
