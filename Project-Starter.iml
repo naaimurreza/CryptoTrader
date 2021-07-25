@@ -13,7 +13,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" scope="TEST">
+    <orderEntry type="module-library" exported="" scope="TEST">
       <library name="JUnit5.4">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/junit-jupiter-5.4.2.jar!/" />
@@ -24,15 +24,6 @@
           <root url="jar://$MODULE_DIR$/lib/junit-jupiter-params-5.4.2.jar!/" />
           <root url="jar://$MODULE_DIR$/lib/junit-jupiter-engine-5.4.2.jar!/" />
           <root url="jar://$MODULE_DIR$/lib/junit-platform-engine-1.4.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../json-20210307.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
