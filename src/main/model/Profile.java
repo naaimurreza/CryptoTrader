@@ -36,7 +36,7 @@ public class Profile {
     //          adds the cryptocurrency to the wallet.
     //          Adds amount to the amount field of the cryptocurrency
     public void buy(Cryptocurrency crypto, double amount) throws InsufficientBalanceException, InvalidAmountException {
-        if (amount >= 0) {
+        if (amount > 0) {
             double cryptoPrice = crypto.getCurrentPrice() * amount;
             if (cryptoPrice <= this.balance) {
                 crypto.addAmount(amount);
