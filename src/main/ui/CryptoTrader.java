@@ -121,29 +121,23 @@ public class CryptoTrader {
             switch (picked) {
                 case 1:
                     this.profile.buy(bitcoin, amount);
-                    System.out.println("Purchase successful");
-                    runCryptoTrader();
                     break;
                 case 2:
                     this.profile.buy(ethereum, amount);
-                    System.out.println("Purchase successful");
-                    runCryptoTrader();
                     break;
                 case 3:
                     this.profile.buy(litecoin, amount);
-                    System.out.println("Purchase successful");
-                    runCryptoTrader();
                     break;
                 case 4:
                     this.profile.buy(dogecoin, amount);
-                    System.out.println("Purchase successful");
-                    runCryptoTrader();
                     break;
             }
         } catch (InsufficientBalanceException e) {
             System.out.println("Insufficient balance");
             runCryptoTrader();
         }
+        System.out.println("Purchase successful");
+        runCryptoTrader();
     }
 
     public void showCryptoMenu() {
@@ -183,29 +177,33 @@ public class CryptoTrader {
             System.out.println("Select the Cryptocurrency you want to trade with: ");
             showCryptoMenu();
             int takeIndex = scanner.nextInt();
-            try {
-                switch (takeIndex) {
-                    case 1:
-                        this.profile.trade(giveIndex, bitcoin);
-                        runCryptoTrader();
-                        break;
-                    case 2:
-                        this.profile.trade(giveIndex, ethereum);
-                        runCryptoTrader();
-                        break;
-                    case 3:
-                        this.profile.trade(giveIndex, litecoin);
-                        runCryptoTrader();
-                        break;
-                    case 4:
-                        this.profile.trade(giveIndex, dogecoin);
-                        runCryptoTrader();
-                        break;
-                }
+            performTrade(takeIndex, giveIndex);
+        }
+    }
 
-            } catch (InvalidSelectionException e) {
-                System.out.println("Please select a valid option.");
+    public void performTrade(int takeIndex, int giveIndex) {
+        try {
+            switch (takeIndex) {
+                case 1:
+                    this.profile.trade(giveIndex, bitcoin);
+                    runCryptoTrader();
+                    break;
+                case 2:
+                    this.profile.trade(giveIndex, ethereum);
+                    runCryptoTrader();
+                    break;
+                case 3:
+                    this.profile.trade(giveIndex, litecoin);
+                    runCryptoTrader();
+                    break;
+                case 4:
+                    this.profile.trade(giveIndex, dogecoin);
+                    runCryptoTrader();
+                    break;
             }
+
+        } catch (InvalidSelectionException e) {
+            System.out.println("Please select a valid option.");
         }
     }
 

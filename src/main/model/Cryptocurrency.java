@@ -45,7 +45,7 @@ public class Cryptocurrency {
     }
 
     public double getCurrentPrice() {
-        int randomInt = (int)Math.floor(Math.random()*100);
+        int randomInt = (int)Math.floor(Math.random() * 100);
         double newPrice;
         if (randomInt > 50) {
             newPrice = this.getPrice() * 1.05;
