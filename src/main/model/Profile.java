@@ -35,14 +35,13 @@ public class Profile {
     // EFFECTS: If there is sufficient balance on the profile, subtracts the cost of cryptocurrency from balance and
     //          adds the cryptocurrency to the wallet.
     //          Adds amount to the amount field of the cryptocurrency
-    public void buy(Cryptocurrency cryptocurrency, double amount)
-            throws InsufficientBalanceException, InvalidAmountException {
+    public void buy(Cryptocurrency crypto, double amount) throws InsufficientBalanceException, InvalidAmountException {
         if (amount >= 0) {
-            double cryptoPrice = cryptocurrency.getCurrentPrice() * amount;
+            double cryptoPrice = crypto.getCurrentPrice() * amount;
             if (cryptoPrice <= this.balance) {
-                cryptocurrency.addAmount(amount);
-                if (!this.cryptoWallet.contains(cryptocurrency)) {
-                    this.cryptoWallet.add(cryptocurrency);
+                crypto.addAmount(amount);
+                if (!this.cryptoWallet.contains(crypto)) {
+                    this.cryptoWallet.add(crypto);
                 }
                 this.balance = this.getBalance() - cryptoPrice;
             } else {

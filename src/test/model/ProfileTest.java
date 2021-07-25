@@ -31,6 +31,7 @@ class ProfileTest {
 
     }
 
+
     @Test
     public void buyTest() {
         try {
@@ -64,6 +65,7 @@ class ProfileTest {
         }
 
     }
+
 
     @Test
     public void sellTest() {
@@ -105,14 +107,23 @@ class ProfileTest {
         try {
             richProfile.sell(3, 1000);
             assertFalse(richProfile.getCryptoWallet().contains(dogecoin));
-
             // pass
         } catch (InvalidAmountException e) {
             fail();
         } catch (InvalidSelectionException e) {
             fail();
         }
+
+        try {
+            richProfile.sell(-1, 1000);
+            fail();
+        } catch (InvalidAmountException e) {
+            fail();
+        } catch (InvalidSelectionException e) {
+            // pass
+        }
     }
+
 
     @Test
     public void tradeTest() {
@@ -132,13 +143,21 @@ class ProfileTest {
 
         try {
             richProfile.trade(2, litecoin);
+            richProfile.trade(2, ethereum);
             assertFalse(richProfile.getCryptoWallet().contains(bitcoin));
             assertTrue(richProfile.getCryptoWallet().contains(litecoin));
+            assertFalse(richProfile.getCryptoWallet().contains(bitcoin));
             // pass
         } catch (InvalidSelectionException e) {
             fail();
         }
-    }
 
+        try {
+            richProfile.trade(-1, ethereum);
+            fail();
+        } catch (InvalidSelectionException e) {
+            // pass
+        }
+    }
 
 }
