@@ -18,3 +18,5 @@ helpful.
 - As a user, I want to be able to sell and remove cryptocurrencies from my crypto wallet.
 - As a user, I want to be able to trade a cryptocurrency I own for another.
 - As a user, I want to be able to view all my cryptocurrencies and their amounts in my crypto wallet.
+
+![image info](./data/buyList.png)
