@@ -2,40 +2,30 @@ package model;
 
 public class Cryptocurrency {
 
-    private String cryptoName;
-    private String cryptoCode;
+    private final String cryptoName;
+    private final String cryptoCode;
     private double amount;
     private double price;
 
-    public Cryptocurrency(String cryptoName, String cryptoCode, double amount, double price) {
+
+    public Cryptocurrency(String cryptoName, String cryptoCode, double price) {
         this.cryptoName = cryptoName;
         this.cryptoCode = cryptoCode;
-        this.amount = amount;
+        this.amount = 0;
         this.price = price;
     }
 
+
     public double getAmount() {
         return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
     }
 
     public String getCryptoName() {
         return cryptoName;
     }
 
-    public void setCryptoName(String cryptoName) {
-        this.cryptoName = cryptoName;
-    }
-
     public String getCryptoCode() {
         return cryptoCode;
-    }
-
-    public void setCryptoCode(String cryptoCode) {
-        this.cryptoCode = cryptoCode;
     }
 
     public double getPrice() {
@@ -44,5 +34,25 @@ public class Cryptocurrency {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public void addAmount(double amount) {
+        this.amount += amount;
+    }
+
+    public void subAmount(double amount) {
+        this.amount -= amount;
+    }
+
+    public double getCurrentPrice() {
+        int randomInt = (int)Math.floor(Math.random()*100);
+        double newPrice;
+        if (randomInt > 50) {
+            newPrice = this.getPrice() * 1.05;
+        } else {
+            newPrice = this.getPrice() * 0.95;
+        }
+        this.setPrice(newPrice);
+        return newPrice;
     }
 }

@@ -1,0 +1,124 @@
+package model;
+
+import exceptions.InsufficientBalanceException;
+import exceptions.InvalidAmountException;
+import exceptions.InvalidSelectionException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ProfileTest {
+    private Profile richProfile;
+    private Profile poorProfile;
+    private Cryptocurrency bitcoin;
+    private Cryptocurrency ethereum;
+    private Cryptocurrency litecoin;
+    private Cryptocurrency dogecoin;
+
+    @BeforeEach
+    public void setUp() {
+        richProfile = new Profile("Python", 1000000);
+        poorProfile = new Profile("Naaimur", 100);
+
+        bitcoin = new Cryptocurrency("Bitcoin", "BTC", 43297.86);
+        ethereum = new Cryptocurrency("Ethereum", "ETH", 2726.81);
+        litecoin = new Cryptocurrency("Litecoin", "LTC", 158.51);
+        dogecoin = new Cryptocurrency("Dogecoin", "DOGE", 0.25);
+
+    }
+
+    @Test
+    public void buyTest() {
+        try {
+            richProfile.buy(ethereum, 10);
+            assertTrue(richProfile.getWallet().contains(ethereum));
+        } catch (InsufficientBalanceException e) {
+            fail();
+        }
+        try {
+            poorProfile.buy(bitcoin, 2);
+            fail();
+        } catch (InsufficientBalanceException e) {
+            // pass
+        }
+
+    }
+
+    @Test
+    public void sellTest() {
+        try {
+            richProfile.buy(ethereum, 10);
+            richProfile.buy(bitcoin, 5);
+            richProfile.buy(dogecoin, 1000);
+            richProfile.sell(1, 5);
+            richProfile.sell(2, 0);
+            // pass
+        } catch (InsufficientBalanceException e) {
+            fail();
+        } catch (InvalidSelectionException e) {
+            fail();
+        } catch (InvalidAmountException e) {
+            fail();
+        }
+
+        try {
+            richProfile.sell(4, 5);
+            fail();
+        } catch (InvalidSelectionException e) {
+            // pass
+        } catch (InvalidAmountException e) {
+            fail();
+        }
+
+        try {
+            richProfile.sell(2, 1100);
+            fail();
+        } catch (InvalidSelectionException e) {
+            fail();
+        } catch (InvalidAmountException e) {
+            // pass
+        }
+
+        try {
+            richProfile.sell(3, 1000);
+            assertTrue(!richProfile.getWallet().contains(dogecoin));
+            // pass
+        } catch (InvalidAmountException e) {
+            fail();
+        } catch (InvalidSelectionException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void tradeTest() {
+        try {
+            richProfile.buy(ethereum, 10);
+            richProfile.buy(bitcoin, 5);
+            richProfile.buy(dogecoin, 1000);
+            richProfile.trade(4, litecoin);
+            fail();
+        } catch (InvalidSelectionException e) {
+            // pass
+        } catch (InsufficientBalanceException e) {
+            fail();
+        }
+
+        try {
+            richProfile.buy(ethereum, 10);
+            richProfile.buy(bitcoin, 5);
+            richProfile.buy(dogecoin, 1000);
+            richProfile.trade(2, litecoin);
+            // pass
+        } catch (InvalidSelectionException e) {
+            fail();
+        } catch (InsufficientBalanceException e) {
+            fail();
+        }
+    }
+
+    @Test
+
+
+}
