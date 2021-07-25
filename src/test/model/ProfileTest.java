@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/*
+  Unit tests for Profile class
+ */
 class ProfileTest {
     private Profile richProfile;
     private Profile poorProfile;
@@ -32,14 +35,31 @@ class ProfileTest {
     public void buyTest() {
         try {
             richProfile.buy(ethereum, 10);
-            assertTrue(richProfile.getWallet().contains(ethereum));
+            assertTrue(richProfile.getCryptoWallet().contains(ethereum));
+            assertEquals(10, richProfile.getCryptoWallet().get(0).getAmount());
         } catch (InsufficientBalanceException e) {
             fail();
+        } catch (InvalidAmountException e) {
+            fail();
         }
+
+
         try {
             poorProfile.buy(bitcoin, 2);
             fail();
         } catch (InsufficientBalanceException e) {
+            // pass
+        } catch (InvalidAmountException e) {
+            fail();
+        }
+
+
+        try {
+            poorProfile.buy(bitcoin, -1);
+            fail();
+        } catch (InsufficientBalanceException e) {
+            fail();
+        } catch (InvalidAmountException e) {
             // pass
         }
 
@@ -53,6 +73,8 @@ class ProfileTest {
             richProfile.buy(dogecoin, 1000);
             richProfile.sell(1, 5);
             richProfile.sell(2, 0);
+            assertEquals(5, richProfile.getCryptoWallet().get(0).getAmount());
+            assertEquals(5, richProfile.getCryptoWallet().get(1).getAmount());
             // pass
         } catch (InsufficientBalanceException e) {
             fail();
@@ -82,7 +104,8 @@ class ProfileTest {
 
         try {
             richProfile.sell(3, 1000);
-            assertTrue(!richProfile.getWallet().contains(dogecoin));
+            assertFalse(richProfile.getCryptoWallet().contains(dogecoin));
+
             // pass
         } catch (InvalidAmountException e) {
             fail();
@@ -103,17 +126,16 @@ class ProfileTest {
             // pass
         } catch (InsufficientBalanceException e) {
             fail();
+        } catch (InvalidAmountException e) {
+            fail();
         }
 
         try {
-            richProfile.buy(ethereum, 10);
-            richProfile.buy(bitcoin, 5);
-            richProfile.buy(dogecoin, 1000);
             richProfile.trade(2, litecoin);
+            assertFalse(richProfile.getCryptoWallet().contains(bitcoin));
+            assertTrue(richProfile.getCryptoWallet().contains(litecoin));
             // pass
         } catch (InvalidSelectionException e) {
-            fail();
-        } catch (InsufficientBalanceException e) {
             fail();
         }
     }
