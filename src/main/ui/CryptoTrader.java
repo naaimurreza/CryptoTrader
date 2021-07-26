@@ -179,7 +179,7 @@ public class CryptoTrader {
             System.out.println("Select the Cryptocurrency you want to sell: ");
             printWallet();
             int index = scanner.nextInt();
-            System.out.println("Select the amount you want to sell (enter 0 to sell all): ");
+            System.out.println("Select the amount you want to sell: ");
             double amount = scanner.nextDouble();
             try {
                 this.profile.sell(index, amount);
