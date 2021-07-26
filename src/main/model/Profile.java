@@ -12,7 +12,7 @@ import java.util.List;
   Represents a profile in CryptoTrader with name, balance in CAD and wallet with a list of acquired cryptocurrencies
  */
 public class Profile {
-    public final String name;
+    private final String name;
     private double balance;
     private final List<Cryptocurrency> cryptoWallet;
 
@@ -30,6 +30,9 @@ public class Profile {
         return balance;
     }
 
+    public String getName() {
+        return name;
+    }
 
     // MODIFIES: this, cryptocurrency
     // EFFECTS: If there is sufficient balance on the profile, subtracts the cost of cryptocurrency from balance and

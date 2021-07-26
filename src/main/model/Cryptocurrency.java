@@ -4,8 +4,8 @@ import java.text.DecimalFormat;
 
 public class Cryptocurrency {
 
-    public final String cryptoName;
-    public final String cryptoCode;
+    private final String cryptoName;
+    private final String cryptoCode;
     private double amount;
     private double price;
 
@@ -21,6 +21,13 @@ public class Cryptocurrency {
         this.price = price;
     }
 
+    public String getCryptoName() {
+        return cryptoName;
+    }
+
+    public String getCryptoCode() {
+        return cryptoCode;
+    }
 
     public double getAmount() {
         return amount;

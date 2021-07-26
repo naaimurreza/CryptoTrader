@@ -47,7 +47,7 @@ public class CryptoTrader {
     public void runCryptoTrader() {
         int command;
         while (!quit) {
-            System.out.println("\nWelcome, " + this.profile.name + "!");
+            System.out.println("\nWelcome, " + this.profile.getName() + "!");
             System.out.println("Balance: $" + this.profile.getBalance());
             displayCryptoTraderMenu();
             command = scanner.nextInt();
@@ -100,7 +100,7 @@ public class CryptoTrader {
                 System.out.println(position + ") "
                         + cryptocurrency.getAmount()
                         + " "
-                        + cryptocurrency.cryptoCode.toUpperCase()
+                        + cryptocurrency.getCryptoCode().toUpperCase()
                         + "\t - \t" + "$"
                         + cryptocurrency.getCurrentPrice()
                         * cryptocurrency.getAmount());
@@ -161,10 +161,10 @@ public class CryptoTrader {
     // MODIFIES: this
     // EFFECTS: Displays all the available cryptocurrencies with current prices.
     public void showCryptoMenu() {
-        System.out.println("1) " + bitcoin.cryptoName + "\t  - \t $" + bitcoin.getCurrentPrice());
-        System.out.println("2) " + ethereum.cryptoName + "\t  - \t $" + ethereum.getCurrentPrice());
-        System.out.println("3) " + litecoin.cryptoName + "\t  - \t $" + litecoin.getCurrentPrice());
-        System.out.println("4) " + dogecoin.cryptoName + "\t  - \t $" + dogecoin.getCurrentPrice());
+        System.out.println("1) " + bitcoin.getCryptoName() + "\t  - \t $" + bitcoin.getCurrentPrice());
+        System.out.println("2) " + ethereum.getCryptoName() + "\t  - \t $" + ethereum.getCurrentPrice());
+        System.out.println("3) " + litecoin.getCryptoName() + "\t  - \t $" + litecoin.getCurrentPrice());
+        System.out.println("4) " + dogecoin.getCryptoName() + "\t  - \t $" + dogecoin.getCurrentPrice());
         System.out.println("5) To go back");
     }
 

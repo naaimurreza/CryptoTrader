@@ -73,6 +73,12 @@ class ProfileTest {
             fail();
         }
 
+        assertEquals("Python", richProfile.getName());
+        assertEquals("Ethereum", richProfile.getCryptoWallet().get(0).getCryptoName());
+        assertEquals("ETH", richProfile.getCryptoWallet().get(0).getCryptoCode());
+
+
+
     }
 
 
