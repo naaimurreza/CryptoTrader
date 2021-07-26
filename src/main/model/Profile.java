@@ -1,6 +1,5 @@
 package model;
 
-
 import exceptions.InsufficientBalanceException;
 import exceptions.InvalidAmountException;
 import exceptions.InvalidSelectionException;
