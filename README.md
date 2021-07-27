@@ -4,7 +4,7 @@
 ***
 
 CryptoTrader © is a game that lets you try out cryptocurrency trading without the fear of losing a lot of money.
-In fact, you don't lose any money at all, you just gain experience. Start off with a small load of a million dollars
+In fact, you don't lose any money at all, you just gain experience. Start off with a small loan of a million dollars
 (or any sum of your desire) and *buy*, *sell* and *trade* cryptocurrencies to expand your fortune! Made for anyone and 
 everyone living through the crypto revolution, this game is fun, easy and helps you build better trading strategies.
 
