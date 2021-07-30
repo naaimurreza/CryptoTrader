@@ -3,6 +3,9 @@ package model;
 import exceptions.InsufficientBalanceException;
 import exceptions.InvalidAmountException;
 import exceptions.InvalidSelectionException;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +13,7 @@ import java.util.List;
 /*
   Represents a profile in CryptoTrader with name, balance in CAD and wallet with a list of acquired cryptocurrencies
  */
-public class Profile {
+public class Profile implements Writable {
     private final String name;
     private double balance;
     private final List<Cryptocurrency> cryptoWallet;
@@ -96,4 +99,20 @@ public class Profile {
         }
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", this.name);
+        jsonObject.put("balance", this.balance);
+        jsonObject.put("cryptowallet", cryptoWalletToJson());
+        return jsonObject;
+    }
+
+    public JSONArray cryptoWalletToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Cryptocurrency cryptocurrency : this.cryptoWallet) {
+            jsonArray.put(cryptocurrency.toJson());
+        }
+        return jsonArray;
+    }
 }

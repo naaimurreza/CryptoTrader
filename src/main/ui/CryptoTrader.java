@@ -5,14 +5,21 @@ import exceptions.InvalidAmountException;
 import exceptions.InvalidSelectionException;
 import model.Cryptocurrency;
 import model.Profile;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /*
   Represents a CryptoTrader game
  */
 public class CryptoTrader {
+    private static final String JSON_STORE = "./data/profile.json";
     private Profile profile;
+    private final JsonWriter jsonWriter;
 
     boolean quit = false;
 
@@ -26,20 +33,39 @@ public class CryptoTrader {
     // MODIFIES: this
     // EFFECTS: runs the profile UI
     public CryptoTrader() {
-        runProfileUI();
+        JsonReader jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
+
+        try {
+            this.profile = jsonReader.read();
+            System.out.println("Loaded " + profile.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("\nLooks like you don't have a profile yet.\n");
+        }
+        if (this.profile == null) {
+            runProfileUI();
+        } else {
+            runCryptoTrader();
+        }
+
     }
 
     // MODIFIES: this
     // EFFECTS: Displays welcome message and asks for user name and initial balance to instantiate a new Profile object.
     //          runs the CryptoTrader UI.
     public void runProfileUI() {
-        System.out.println("Welcome To CryptoTrader©!");
-        System.out.println("Please enter a name for your profile: ");
-        String name = scanner.nextLine();
-        System.out.println("Please enter a balance for your profile: ");
-        double balance = scanner.nextDouble();
-        this.profile = new Profile(name, balance);
-        runCryptoTrader();
+        try {
+            System.out.println("Welcome To CryptoTrader©!");
+            System.out.println("Please enter a name for your profile: ");
+            String name = scanner.nextLine();
+            System.out.println("Please enter a balance for your profile: ");
+            double balance = scanner.nextDouble();
+            this.profile = new Profile(name, balance);
+            runCryptoTrader();
+        } catch (InputMismatchException e) {
+            System.out.println("Please enter a valid input");
+        }
+
     }
 
     // MODIFIES: this
@@ -52,7 +78,16 @@ public class CryptoTrader {
             displayCryptoTraderMenu();
             command = scanner.nextInt();
             if (command == 5) {
-                quit = true;
+                try {
+                    jsonWriter.open();
+                    jsonWriter.write(profile);
+                    jsonWriter.close();
+                    System.out.println("Auto-save successful.");
+                    quit = true;
+                } catch (FileNotFoundException e) {
+                    System.out.println("Unable to write to file: " + JSON_STORE);
+                }
+
             } else {
                 processCommand(command);
             }

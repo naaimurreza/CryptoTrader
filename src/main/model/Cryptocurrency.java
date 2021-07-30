@@ -1,8 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.text.DecimalFormat;
 
-public class Cryptocurrency {
+public class Cryptocurrency implements Writable {
 
     private final String cryptoName;
     private final String cryptoCode;
@@ -18,6 +21,13 @@ public class Cryptocurrency {
         this.cryptoName = cryptoName;
         this.cryptoCode = cryptoCode;
         this.amount = 0;
+        this.price = price;
+    }
+
+    public Cryptocurrency(String cryptoName, String cryptoCode, double price, double amount) {
+        this.cryptoName = cryptoName;
+        this.cryptoCode = cryptoCode;
+        this.amount = amount;
         this.price = price;
     }
 
@@ -63,5 +73,15 @@ public class Cryptocurrency {
         }
         this.setPrice(newPrice);
         return Double.parseDouble(decimalFormat.format(newPrice));
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("cryptoName", this.cryptoName);
+        jsonObject.put("cryptoCode", this.cryptoCode);
+        jsonObject.put("amount", this.amount);
+        jsonObject.put("price", this.price);
+        return jsonObject;
     }
 }

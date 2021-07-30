@@ -38,9 +38,7 @@ class ProfileTest {
             richProfile.buy(ethereum, 10);
             assertTrue(richProfile.getCryptoWallet().contains(ethereum));
             assertEquals(10, richProfile.getCryptoWallet().get(0).getAmount());
-        } catch (InsufficientBalanceException e) {
-            fail();
-        } catch (InvalidAmountException e) {
+        } catch (InsufficientBalanceException | InvalidAmountException e) {
             fail();
         }
 
@@ -67,9 +65,7 @@ class ProfileTest {
             richProfile.buy(ethereum, 5);
             assertEquals(15, richProfile.getCryptoWallet().get(0).getAmount());
             // pass
-        } catch (InsufficientBalanceException e) {
-            fail();
-        } catch (InvalidAmountException e) {
+        } catch (InsufficientBalanceException | InvalidAmountException e) {
             fail();
         }
 
@@ -93,11 +89,7 @@ class ProfileTest {
             assertEquals(5, richProfile.getCryptoWallet().get(0).getAmount());
             assertEquals(5, richProfile.getCryptoWallet().get(1).getAmount());
             // pass
-        } catch (InsufficientBalanceException e) {
-            fail();
-        } catch (InvalidSelectionException e) {
-            fail();
-        } catch (InvalidAmountException e) {
+        } catch (InsufficientBalanceException | InvalidAmountException | InvalidSelectionException e) {
             fail();
         }
 
@@ -123,9 +115,7 @@ class ProfileTest {
             richProfile.sell(3, 1000);
             assertFalse(richProfile.getCryptoWallet().contains(dogecoin));
             // pass
-        } catch (InvalidAmountException e) {
-            fail();
-        } catch (InvalidSelectionException e) {
+        } catch (InvalidAmountException | InvalidSelectionException e) {
             fail();
         }
 
@@ -150,9 +140,7 @@ class ProfileTest {
             fail();
         } catch (InvalidSelectionException e) {
             // pass
-        } catch (InsufficientBalanceException e) {
-            fail();
-        } catch (InvalidAmountException e) {
+        } catch (InsufficientBalanceException | InvalidAmountException e) {
             fail();
         }
 
