@@ -1,0 +1,18 @@
+{
+  "balance": 1000000,
+  "name": "Python",
+  "cryptowallet": [
+    {
+      "amount": 10,
+      "price": 41030.134582499995,
+      "cryptoName": "Bitcoin",
+      "cryptoCode": "BTC"
+    },
+    {
+      "amount": 10000,
+      "price": 0.26000,
+      "cryptoName": "Dogecoin",
+      "cryptoCode": "DOGE"
+    }
+  ]
+}

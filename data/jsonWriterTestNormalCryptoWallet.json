@@ -1,0 +1,24 @@
+{
+    "balance": 250,
+    "name": "BearMarketComingSoon",
+    "cryptowallet": [
+        {
+            "amount": 10,
+            "price": 3.074E-6,
+            "cryptoName": "Safemoon",
+            "cryptoCode": "SAFEMOON"
+        },
+        {
+            "amount": 26,
+            "price": 7.68E-6,
+            "cryptoName": "Shiba Inu",
+            "cryptoCode": "SHIB"
+        },
+        {
+            "amount": 30,
+            "price": 0.3331,
+            "cryptoName": "Stellar Lumen",
+            "cryptoCode": "XLM"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "balance": 609236.814,
+    "name": "Python",
+    "cryptowallet": [{
+        "amount": 10,
+        "price": 41030.134582499995,
+        "cryptoName": "Bitcoin",
+        "cryptoCode": "BTC"
+    }]
+}
