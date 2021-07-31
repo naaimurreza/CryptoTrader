@@ -5,6 +5,9 @@ import persistence.Writable;
 
 import java.text.DecimalFormat;
 
+/*
+ Represents a cryptocurrency with cryptoName, cryptoCode, amount of it present and price in CAD
+ */
 public class Cryptocurrency implements Writable {
 
     private final String cryptoName;
@@ -14,9 +17,8 @@ public class Cryptocurrency implements Writable {
 
     DecimalFormat decimalFormat = new DecimalFormat("####.0000");
 
-/*
- Represents a cryptocurrency with cryptoName, cryptoCode, amount of it present and price in CAD
- */
+    // EFFECTS: Constructs a cryptocurrency object with amount set to zero
+    // REQUIRES: price >= 0
     public Cryptocurrency(String cryptoName, String cryptoCode, double price) {
         this.cryptoName = cryptoName;
         this.cryptoCode = cryptoCode;
@@ -24,6 +26,8 @@ public class Cryptocurrency implements Writable {
         this.price = price;
     }
 
+    // EFFECTS: Constructs a cryptocurrency object
+    // REQUIRES: price >= 0
     public Cryptocurrency(String cryptoName, String cryptoCode, double price, double amount) {
         this.cryptoName = cryptoName;
         this.cryptoCode = cryptoCode;
@@ -51,10 +55,16 @@ public class Cryptocurrency implements Writable {
         this.price = price;
     }
 
+    // REQUIRES: amount > 0
+    // MODIFIES: this
+    // EFFECTS: Adds amount to this.amount
     public void addAmount(double amount) {
         this.amount += amount;
     }
 
+    // REQUIRES: amount > 0
+    // MODIFIES: this
+    // EFFECTS: Subtracts amount to this.amount
     public void subAmount(double amount) {
         this.amount -= amount;
     }
@@ -75,6 +85,7 @@ public class Cryptocurrency implements Writable {
         return Double.parseDouble(decimalFormat.format(newPrice));
     }
 
+    //EFFECTS: Returns data in this cryptocurrency as a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();

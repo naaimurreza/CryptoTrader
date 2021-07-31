@@ -11,6 +11,7 @@ import persistence.JsonWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -18,33 +19,33 @@ import java.util.Scanner;
  */
 public class CryptoTrader {
     private static final String JSON_STORE = "./data/profile.json";
+    private static final String JSON_MARKET = "./data/cryptoMarket.json";
     private Profile profile;
     private final JsonWriter jsonWriter;
+    private List<Cryptocurrency> market;
 
     boolean quit = false;
-
-    private final Cryptocurrency bitcoin = new Cryptocurrency("Bitcoin", "BTC", 43297.8600);
-    private final Cryptocurrency ethereum = new Cryptocurrency("Ethereum", "ETH", 2726.8100);
-    private final Cryptocurrency litecoin = new Cryptocurrency("Litecoin", "LTC", 158.5100);
-    private final Cryptocurrency dogecoin = new Cryptocurrency("Dogecoin", "DOGE", 0.2500);
 
     private final Scanner scanner = new Scanner(System.in);
 
     // MODIFIES: this
     // EFFECTS: runs the profile UI
     public CryptoTrader() {
-        JsonReader jsonReader = new JsonReader(JSON_STORE);
+        JsonReader jsonReaderProfile = new JsonReader(JSON_STORE);
+        JsonReader jsonReaderMarket = new JsonReader(JSON_MARKET);
         jsonWriter = new JsonWriter(JSON_STORE);
 
         try {
-            this.profile = jsonReader.read();
-            System.out.println("Loaded " + profile.getName() + " from " + JSON_STORE);
+            this.market = jsonReaderMarket.readMarket();
+            this.profile = jsonReaderProfile.read();
+            System.out.println("Successfully loaded CryptoTrade©!");
         } catch (IOException e) {
             System.out.println("\nLooks like you don't have a profile yet.\n");
         }
         if (this.profile == null) {
             runProfileUI();
         } else {
+            System.out.println("Welcome back, " + this.profile.getName() + "!");
             runCryptoTrader();
         }
 
@@ -57,7 +58,8 @@ public class CryptoTrader {
         try {
             System.out.println("Welcome To CryptoTrader©!");
             System.out.println("Please enter a name for your profile: ");
-            String name = scanner.nextLine();
+            String name = scanner.next();
+            scanner.nextLine();
             System.out.println("Please enter a balance for your profile: ");
             double balance = scanner.nextDouble();
             this.profile = new Profile(name, balance);
@@ -73,7 +75,7 @@ public class CryptoTrader {
     public void runCryptoTrader() {
         int command;
         while (!quit) {
-            System.out.println("\nWelcome, " + this.profile.getName() + "!");
+            System.out.println("\nCryptoMaster, " + this.profile.getName() + ".");
             System.out.println("Balance: $" + this.profile.getBalance());
             displayCryptoTraderMenu();
             command = scanner.nextInt();
@@ -82,7 +84,8 @@ public class CryptoTrader {
                     jsonWriter.open();
                     jsonWriter.write(profile);
                     jsonWriter.close();
-                    System.out.println("Auto-save successful.");
+                    System.out.println("Auto-save complete.");
+                    System.out.println("Goodbye.");
                     quit = true;
                 } catch (FileNotFoundException e) {
                     System.out.println("Unable to write to file: " + JSON_STORE);
@@ -103,6 +106,7 @@ public class CryptoTrader {
         System.out.println("\t3: To sell");
         System.out.println("\t4: To trade");
         System.out.println("\t5: To quit");
+        System.out.println("\t6: To restart");
     }
 
     // EFFECTS: Processes user command
@@ -120,6 +124,9 @@ public class CryptoTrader {
             case 4:
                 tradeCrypto();
                 break;
+            case 6:
+                this.profile = null;
+                runProfileUI();
             default:
                 System.out.println("Please enter a valid option");
         }
@@ -151,10 +158,10 @@ public class CryptoTrader {
             System.out.println("\nSelect the Cryptocurrency you want to buy: ");
             showCryptoMenu();
             int picked = scanner.nextInt();
-            if (picked > 5 || picked < 1) {
+            if (picked > this.market.size() || picked < 1) {
                 System.out.println("Please select a valid option.");
             } else {
-                if (picked == 5) {
+                if (picked == this.market.size() + 1) {
                     runCryptoTrader();
                 } else {
                     System.out.println("Enter the amount you want to buy: ");
@@ -169,18 +176,9 @@ public class CryptoTrader {
     public void processBuyOption(int picked) {
         double amount = scanner.nextDouble();
         try {
-            switch (picked) {
-                case 1:
-                    this.profile.buy(bitcoin, amount);
-                    break;
-                case 2:
-                    this.profile.buy(ethereum, amount);
-                    break;
-                case 3:
-                    this.profile.buy(litecoin, amount);
-                    break;
-                case 4:
-                    this.profile.buy(dogecoin, amount);
+            Cryptocurrency pickedToBuy = this.market.get(picked - 1);
+            if (this.profile.buy(pickedToBuy, amount)) {
+                System.out.println("\nPurchase successful!");
             }
         } catch (InsufficientBalanceException e) {
             System.out.println("Insufficient balance");
@@ -188,7 +186,6 @@ public class CryptoTrader {
         } catch (InvalidAmountException e) {
             System.out.println("Please enter a valid amount.");
         }
-        System.out.println("Purchase successful");
         runCryptoTrader();
     }
 
@@ -196,11 +193,15 @@ public class CryptoTrader {
     // MODIFIES: this
     // EFFECTS: Displays all the available cryptocurrencies with current prices.
     public void showCryptoMenu() {
-        System.out.println("1) " + bitcoin.getCryptoName() + "\t  - \t $" + bitcoin.getCurrentPrice());
-        System.out.println("2) " + ethereum.getCryptoName() + "\t  - \t $" + ethereum.getCurrentPrice());
-        System.out.println("3) " + litecoin.getCryptoName() + "\t  - \t $" + litecoin.getCurrentPrice());
-        System.out.println("4) " + dogecoin.getCryptoName() + "\t  - \t $" + dogecoin.getCurrentPrice());
-        System.out.println("5) To go back");
+        int position = 1;
+        for (Cryptocurrency cryptocurrency : this.market) {
+            System.out.println(position + ") "
+                    + cryptocurrency.getCryptoName()
+                    + "\t  - \t $"
+                    + cryptocurrency.getCurrentPrice());
+            position++;
+        }
+        System.out.println(position + ") To go back");
     }
 
     // MODIFIES: this
@@ -218,7 +219,7 @@ public class CryptoTrader {
             double amount = scanner.nextDouble();
             try {
                 this.profile.sell(index, amount);
-                System.out.println("Successfully sold");
+                System.out.println("Successfully sold!");
                 runCryptoTrader();
             } catch (InvalidSelectionException e) {
                 System.out.println("Please select a valid option.");
@@ -250,25 +251,9 @@ public class CryptoTrader {
     // EFFECTS: Conducts a trade.
     public void performTrade(int takeIndex, int giveIndex) {
         try {
-            switch (takeIndex) {
-                case 1:
-                    this.profile.trade(giveIndex, bitcoin);
-                    runCryptoTrader();
-                    break;
-                case 2:
-                    this.profile.trade(giveIndex, ethereum);
-                    runCryptoTrader();
-                    break;
-                case 3:
-                    this.profile.trade(giveIndex, litecoin);
-                    runCryptoTrader();
-                    break;
-                case 4:
-                    this.profile.trade(giveIndex, dogecoin);
-                    runCryptoTrader();
-                    break;
-            }
-
+            Cryptocurrency cryptoToTake = this.market.get(takeIndex);
+            this.profile.trade(giveIndex, cryptoToTake);
+            runCryptoTrader();
         } catch (InvalidSelectionException e) {
             System.out.println("Please select a valid option.");
         }

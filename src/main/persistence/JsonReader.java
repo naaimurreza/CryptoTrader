@@ -4,13 +4,17 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import model.Cryptocurrency;
 import model.Profile;
 import org.json.*;
 
-// Represents a reader that reads workroom from JSON data stored in file
+/*
+  Represents a reader that reads workroom from JSON data stored in file
+ */
 public class JsonReader {
     private final String file;
 
@@ -25,6 +29,24 @@ public class JsonReader {
         String jsonData = readFile(file);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseProfile(jsonObject);
+    }
+
+    // EFFECTS: Returns list of Cryptocurrencies formed by reading and parsing the data in cryptoMarket.json.
+    //          Throws IOException if an error occurs reading data from file.
+    public List<Cryptocurrency> readMarket() throws IOException {
+        String jsonData = readFile(file);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        JSONArray jsonArray = jsonObject.getJSONArray("market");
+        List<Cryptocurrency> market = new ArrayList<>();
+        for (Object json : jsonArray) {
+            JSONObject crypto = (JSONObject) json;
+            String cryptoName = crypto.getString("name");
+            double price = crypto.getDouble("price");
+            String cryptoCode = crypto.getString("base");
+            Cryptocurrency newCrypto = new Cryptocurrency(cryptoName, cryptoCode, price);
+            market.add(newCrypto);
+        }
+        return market;
     }
 
     // EFFECTS: reads source file as string and returns it

@@ -40,7 +40,7 @@ public class Profile implements Writable {
     // EFFECTS: If there is sufficient balance on the profile, subtracts the cost of cryptocurrency from balance and
     //          adds the cryptocurrency to the wallet.
     //          Adds amount to the amount field of the cryptocurrency
-    public void buy(Cryptocurrency crypto, double amount) throws InsufficientBalanceException, InvalidAmountException {
+    public boolean buy(Cryptocurrency crypto, double amount) throws InsufficientBalanceException, InvalidAmountException {
         if (amount > 0) {
             double cryptoPrice = crypto.getCurrentPrice() * amount;
             if (cryptoPrice <= this.balance) {
@@ -49,6 +49,7 @@ public class Profile implements Writable {
                     this.cryptoWallet.add(crypto);
                 }
                 this.balance = this.getBalance() - cryptoPrice;
+                return true;
             } else {
                 throw new InsufficientBalanceException();
             }
@@ -99,6 +100,7 @@ public class Profile implements Writable {
         }
     }
 
+    // EFFECTS: Returns all the data in this as a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
@@ -108,6 +110,8 @@ public class Profile implements Writable {
         return jsonObject;
     }
 
+
+    // EFFECTS: Returns cryptocurrencies in this.cryptoWallet as a JSON array
     public JSONArray cryptoWalletToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Cryptocurrency cryptocurrency : this.cryptoWallet) {

@@ -1,10 +1,24 @@
 {
-    "balance": 609236.814,
-    "name": "Python",
-    "cryptowallet": [{
-        "amount": 10,
-        "price": 41030.134582499995,
-        "cryptoName": "Bitcoin",
-        "cryptoCode": "BTC"
-    }]
+    "balance": 535343.523,
+    "name": "Naaimur",
+    "cryptowallet": [
+        {
+            "amount": 10,
+            "price": 43853.45226084375,
+            "cryptoName": "Bitcoin",
+            "cryptoCode": "BTC"
+        },
+        {
+            "amount": 200,
+            "price": 1.8665839924554377,
+            "cryptoName": "Cardano",
+            "cryptoCode": "ADA"
+        },
+        {
+            "amount": 2000,
+            "price": 0.7927568968593749,
+            "cryptoName": "Ripple",
+            "cryptoCode": "XRP"
+        }
+    ]
 }
