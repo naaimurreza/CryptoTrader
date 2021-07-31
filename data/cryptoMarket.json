@@ -1,0 +1,60 @@
+{
+  "market": [
+    {
+      "name": "Bitcoin",
+      "base": "BTC",
+      "target": "CAD",
+      "price": 51276.70000000,
+      "volume": 73.13005831,
+      "change": -175.30000000
+    },
+    {
+      "name": "Ethereum",
+      "base": "ETH",
+      "target": "CAD",
+      "price": 3039.44000000,
+      "volume": 484.98205946,
+      "change": -2.56000000
+    },
+    {
+      "name": "Litecoin",
+      "base": "LTC",
+      "target": "CAD",
+      "price": 177.13754874,
+      "volume": 0,
+      "change": -0.70423118
+    },
+    {
+      "name": "Dogecoin",
+      "base": "DOGE",
+      "target": "CAD",
+      "price": 0.25562822,
+      "volume": 0,
+      "change": -0.00060274
+    },
+    {
+      "name": "Cardano",
+      "base": "ADA",
+      "target": "CAD",
+      "price": 1.61646660,
+      "volume": 0,
+      "change": -0.00015524
+    },
+    {
+      "name": "Tether",
+      "base": "USDT",
+      "target": "CAD",
+      "price": 1.23775664,
+      "volume": 0,
+      "change": 0.00027089
+    },
+    {
+      "name": "Ripple",
+      "base": "XRP",
+      "target": "CAD",
+      "price": 0.92695000,
+      "volume": 253968.67969872,
+      "change": -0.00427000
+    }
+  ]
+}
