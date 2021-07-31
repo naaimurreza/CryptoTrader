@@ -1,7 +1,5 @@
 package ui;
 
-import model.Profile;
-
 /*
   Main class of CryptoTrader
  */

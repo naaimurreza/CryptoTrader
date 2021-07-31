@@ -4,19 +4,19 @@
     "cryptowallet": [
         {
             "amount": 10,
-            "price": 43853.45226084375,
+            "price": 41660.77964780156,
             "cryptoName": "Bitcoin",
             "cryptoCode": "BTC"
         },
         {
             "amount": 200,
-            "price": 1.8665839924554377,
+            "price": 1.7732547928326658,
             "cryptoName": "Cardano",
             "cryptoCode": "ADA"
         },
         {
             "amount": 2000,
-            "price": 0.7927568968593749,
+            "price": 0.7531190520164062,
             "cryptoName": "Ripple",
             "cryptoCode": "XRP"
         }

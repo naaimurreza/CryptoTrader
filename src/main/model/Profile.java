@@ -40,7 +40,8 @@ public class Profile implements Writable {
     // EFFECTS: If there is sufficient balance on the profile, subtracts the cost of cryptocurrency from balance and
     //          adds the cryptocurrency to the wallet.
     //          Adds amount to the amount field of the cryptocurrency
-    public boolean buy(Cryptocurrency crypto, double amount) throws InsufficientBalanceException, InvalidAmountException {
+    public boolean buy(Cryptocurrency crypto, double amount)
+            throws InsufficientBalanceException, InvalidAmountException {
         if (amount > 0) {
             double cryptoPrice = crypto.getCurrentPrice() * amount;
             if (cryptoPrice <= this.balance) {
