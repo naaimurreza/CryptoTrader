@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 /*
  Represents a cryptocurrency with cryptoName, cryptoCode, amount of it present and price in CAD
@@ -94,5 +95,22 @@ public class Cryptocurrency implements Writable {
         jsonObject.put("amount", this.amount);
         jsonObject.put("price", this.price);
         return jsonObject;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Cryptocurrency that = (Cryptocurrency) o;
+        return Objects.equals(cryptoName, that.cryptoName) && Objects.equals(cryptoCode, that.cryptoCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cryptoName, cryptoCode);
     }
 }

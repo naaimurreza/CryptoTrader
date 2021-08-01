@@ -75,9 +75,11 @@ public class CryptoTrader {
     public void runCryptoTrader() {
         int command;
         while (!quit) {
-            System.out.println("\nCryptoMaster, " + this.profile.getName() + ".");
+            System.out.println("\n*********************************");
+            System.out.println("CryptoMaster, " + this.profile.getName() + ".");
             System.out.println("Balance: $" + this.profile.getBalance());
             displayCryptoTraderMenu();
+            System.out.println("*********************************");
             command = scanner.nextInt();
             if (command == 5) {
                 try {
@@ -88,7 +90,7 @@ public class CryptoTrader {
                     System.out.println("Goodbye.");
                     quit = true;
                 } catch (FileNotFoundException e) {
-                    System.out.println("Unable to write to file: " + JSON_STORE);
+                    System.out.println("Failed to auto-save");
                 }
 
             } else {
@@ -100,7 +102,7 @@ public class CryptoTrader {
 
     // EFFECTS: Displays the main CryptoTrader menu.
     public void displayCryptoTraderMenu() {
-        System.out.println("Select an option:");
+        System.out.println("\nSelect an option:");
         System.out.println("\t1: To view your wallet");
         System.out.println("\t2: To buy");
         System.out.println("\t3: To sell");
@@ -135,8 +137,9 @@ public class CryptoTrader {
     // EFFECTS: Displays all the cryptocurrencies in the wallet or tells user if there is nothing in the wallet.
     public void printWallet() {
         if (this.profile.getCryptoWallet().size() == 0) {
-            System.out.println("Your wallet is currently empty.");
+            System.out.println("\nYour CryptoTrader Wallet is currently empty.");
         } else {
+            System.out.println("\nYour CryptoTrader Wallet: ");
             int position = 1;
             for (Cryptocurrency cryptocurrency : this.profile.getCryptoWallet()) {
                 System.out.println(position + ") "
@@ -158,7 +161,7 @@ public class CryptoTrader {
             System.out.println("\nSelect the Cryptocurrency you want to buy: ");
             showCryptoMenu();
             int picked = scanner.nextInt();
-            if (picked > this.market.size() || picked < 1) {
+            if (picked > this.market.size() + 1 || picked < 1) {
                 System.out.println("Please select a valid option.");
             } else {
                 if (picked == this.market.size() + 1) {
@@ -212,7 +215,7 @@ public class CryptoTrader {
             runCryptoTrader();
         }
         while (!quit) {
-            System.out.println("Select the Cryptocurrency you want to sell: ");
+            System.out.println("\nSelect the Cryptocurrency you want to sell: ");
             printWallet();
             int index = scanner.nextInt();
             System.out.println("Select the amount you want to sell: ");
@@ -237,7 +240,7 @@ public class CryptoTrader {
             runCryptoTrader();
         }
         while (!quit) {
-            System.out.println("Select Cryptocurrency you want to trade: ");
+            System.out.println("\nSelect Cryptocurrency you want to trade: ");
             printWallet();
             int giveIndex = scanner.nextInt();
             System.out.println("Select the Cryptocurrency you want to trade with: ");
@@ -251,7 +254,7 @@ public class CryptoTrader {
     // EFFECTS: Conducts a trade.
     public void performTrade(int takeIndex, int giveIndex) {
         try {
-            Cryptocurrency cryptoToTake = this.market.get(takeIndex);
+            Cryptocurrency cryptoToTake = this.market.get(takeIndex - 1);
             this.profile.trade(giveIndex, cryptoToTake);
             runCryptoTrader();
         } catch (InvalidSelectionException e) {

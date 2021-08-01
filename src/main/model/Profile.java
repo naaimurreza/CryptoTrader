@@ -18,9 +18,15 @@ public class Profile implements Writable {
     private double balance;
     private final List<Cryptocurrency> cryptoWallet;
 
+    // EFFECTS: Constructs a Profile object with name and balance
+    //          If balance is <= 0, sets the balance to $1,000,000.00
     public Profile(String name, double balance) {
         this.name = name;
-        this.balance = balance;
+        if (balance > 0) {
+            this.balance = balance;
+        } else {
+            this.balance = 1000000;
+        }
         cryptoWallet = new ArrayList<>();
     }
 
@@ -45,9 +51,12 @@ public class Profile implements Writable {
         if (amount > 0) {
             double cryptoPrice = crypto.getCurrentPrice() * amount;
             if (cryptoPrice <= this.balance) {
-                crypto.addAmount(amount);
                 if (!this.cryptoWallet.contains(crypto)) {
+                    crypto.addAmount(amount);
                     this.cryptoWallet.add(crypto);
+                } else {
+                    Cryptocurrency cryptocurrency = getCrypto(this.cryptoWallet, crypto);
+                    cryptocurrency.addAmount(amount);
                 }
                 this.balance = this.getBalance() - cryptoPrice;
                 return true;
@@ -95,11 +104,27 @@ public class Profile implements Writable {
             this.cryptoWallet.remove(giveCrypto);
             if (!this.cryptoWallet.contains(takeCrypto)) {
                 this.cryptoWallet.add(takeCrypto);
+            } else {
+                takeCrypto = getCrypto(this.cryptoWallet, takeCrypto);
+                takeCrypto.addAmount(getAmountCrypto);
             }
         } else {
             throw new InvalidSelectionException();
         }
     }
+
+
+    // EFFECTS: Returns the Cryptocurrency instance in the crypto wallet that is equal to cryptocurrency if found,
+    //          returns null otherwise
+    public Cryptocurrency getCrypto(List<Cryptocurrency> wallet, Cryptocurrency cryptocurrency) {
+        for (Cryptocurrency crypto : wallet) {
+            if (crypto.equals(cryptocurrency)) {
+                return crypto;
+            }
+        }
+        return null;
+    }
+
 
     // EFFECTS: Returns all the data in this as a JSON object
     @Override
