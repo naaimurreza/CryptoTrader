@@ -97,15 +97,17 @@ public class Cryptocurrency implements Writable {
         return jsonObject;
     }
 
+    // EFFECTS: Returns true if this.cryptoCode is the same as that.cryptoCode, false otherwise
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
         Cryptocurrency that = (Cryptocurrency) o;
-        return Objects.equals(this.hashCode(), that.hashCode()) && Objects.equals(cryptoCode, that.cryptoCode);
+        return Objects.equals(cryptoCode, that.cryptoCode);
     }
 
+    // Returns integer hashcode gotten by hashing this.cryptoCode;
     @Override
     public int hashCode() {
         return Objects.hash(cryptoCode);

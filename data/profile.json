@@ -1,28 +1,28 @@
 {
-    "balance": 91928.20010000012,
+    "balance": 102485.90310000013,
     "name": "Python",
     "cryptowallet": [
         {
             "amount": 12,
-            "price": 50765.85267345925,
+            "price": 61551.94568314102,
             "cryptoName": "Bitcoin",
             "cryptoCode": "BTC"
         },
         {
             "amount": 105,
-            "price": 3159.617358611414,
+            "price": 3301.030970398191,
             "cryptoName": "Ethereum",
             "cryptoCode": "ETH"
         },
         {
             "amount": 10000,
-            "price": 1.4479469790522919,
+            "price": 1.368680479134367,
             "cryptoName": "Cardano",
             "cryptoCode": "ADA"
         },
         {
             "amount": 20,
-            "price": 0.9708642562500002,
+            "price": 1.121086992804803,
             "cryptoName": "Ripple",
             "cryptoCode": "XRP"
         }

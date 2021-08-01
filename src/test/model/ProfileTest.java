@@ -86,8 +86,6 @@ class ProfileTest {
         assertEquals("Ethereum", richProfile.getCryptoWallet().get(0).getCryptoName());
         assertEquals("ETH", richProfile.getCryptoWallet().get(0).getCryptoCode());
 
-
-
     }
 
 
@@ -175,6 +173,13 @@ class ProfileTest {
         } catch (InvalidSelectionException e) {
             // pass
         }
+    }
+
+    @Test
+    public void hashCodeTest() {
+        Cryptocurrency newBitcoin = new Cryptocurrency("Bitcoin", "BTC", 48000);
+        assertEquals(bitcoin.hashCode(), newBitcoin.hashCode());
+        assertNotEquals(bitcoin.hashCode(), ethereum.hashCode());
     }
 
 }

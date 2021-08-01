@@ -18,13 +18,13 @@ import org.json.*;
 public class JsonReader {
     private final String file;
 
-    // EFFECTS: constructs reader to read from source file
+    // EFFECTS: Constructs reader to read from source file
     public JsonReader(String source) {
         this.file = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
-    // throws IOException if an error occurs reading data from file
+    // EFFECTS: Reads profile from file and returns it;
+    //          throws IOException if an error occurs reading data from file
     public Profile read() throws IOException {
         String jsonData = readFile(file);
         JSONObject jsonObject = new JSONObject(jsonData);
@@ -49,7 +49,7 @@ public class JsonReader {
         return market;
     }
 
-    // EFFECTS: reads source file as string and returns it
+    // EFFECTS: Reads source file as string and returns it
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
@@ -60,7 +60,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: Parses profile from JSON object and returns it
     private Profile parseProfile(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         double balance = jsonObject.getDouble("balance");
@@ -69,8 +69,8 @@ public class JsonReader {
         return profile;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: profile
+    // EFFECTS: Parses cryptocurrencies from JSON object and adds them to profile.cryptoWallet
     private void addCryptoWallet(Profile profile, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("cryptowallet");
         for (Object json : jsonArray) {
@@ -79,8 +79,8 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: profile
+    // EFFECTS: Parses cryptocurrency from JSON object and adds it to profile.cryptoWallet
     private void addCryptocurrency(Profile profile, JSONObject jsonObject) {
         String cryptoName = jsonObject.getString("cryptoName");
         double price = jsonObject.getDouble("price");
