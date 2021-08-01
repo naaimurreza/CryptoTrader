@@ -103,11 +103,11 @@ public class Cryptocurrency implements Writable {
             return true;
         }
         Cryptocurrency that = (Cryptocurrency) o;
-        return Objects.equals(cryptoName, that.cryptoName) && Objects.equals(cryptoCode, that.cryptoCode);
+        return Objects.equals(this.hashCode(), that.hashCode()) && Objects.equals(cryptoCode, that.cryptoCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cryptoName, cryptoCode);
+        return Objects.hash(cryptoCode);
     }
 }
