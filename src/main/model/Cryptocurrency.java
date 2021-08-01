@@ -102,9 +102,6 @@ public class Cryptocurrency implements Writable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
         Cryptocurrency that = (Cryptocurrency) o;
         return Objects.equals(cryptoName, that.cryptoName) && Objects.equals(cryptoCode, that.cryptoCode);
     }

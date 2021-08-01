@@ -105,8 +105,9 @@ public class Profile implements Writable {
             if (!this.cryptoWallet.contains(takeCrypto)) {
                 this.cryptoWallet.add(takeCrypto);
             } else {
-                takeCrypto = getCrypto(this.cryptoWallet, takeCrypto);
-                takeCrypto.addAmount(getAmountCrypto);
+                Cryptocurrency takeCryptoNewInstance = getCrypto(this.cryptoWallet, takeCrypto);
+                assert takeCryptoNewInstance.hashCode() == takeCrypto.hashCode();
+                takeCryptoNewInstance.addAmount(getAmountCrypto);
             }
         } else {
             throw new InvalidSelectionException();

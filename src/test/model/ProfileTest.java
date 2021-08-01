@@ -31,6 +31,19 @@ class ProfileTest {
 
     }
 
+    @Test
+    public void getCryptoTest() {
+        richProfile.getCryptoWallet().add(bitcoin);
+        richProfile.getCryptoWallet().add(ethereum);
+        assertNull(richProfile.getCrypto(richProfile.getCryptoWallet(), litecoin));
+    }
+
+    @Test
+    public void constructorTest() {
+        Profile testProfile = new Profile("HelloWorld", -1);
+        assertEquals(1000000, testProfile.getBalance());
+    }
+
 
     @Test
     public void buyTest() {
