@@ -107,7 +107,7 @@ public class Cryptocurrency implements Writable {
         return Objects.equals(cryptoCode, that.cryptoCode);
     }
 
-    // Returns integer hashcode gotten by hashing this.cryptoCode;
+    // EFFECTS: Returns integer hashcode gotten by hashing this.cryptoCode;
     @Override
     public int hashCode() {
         return Objects.hash(cryptoCode);

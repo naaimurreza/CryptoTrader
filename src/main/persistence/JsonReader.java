@@ -13,7 +13,8 @@ import model.Profile;
 import org.json.*;
 
 /*
-  Represents a reader that reads workroom from JSON data stored in file
+  Represents a reader that reads profile from JSON data stored in file
+  Most methods taken from JsonSerializationDemo repository
  */
 public class JsonReader {
     private final String file;

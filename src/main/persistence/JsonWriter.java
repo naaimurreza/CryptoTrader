@@ -5,7 +5,8 @@ import org.json.JSONObject;
 import java.io.*;
 
 /*
-  Represents a writer that writes JSON representation of workroom to file
+  Represents a writer that writes JSON representation of profile to file
+  Methods taken from JsonSerializationDemo repository
  */
 public class JsonWriter {
     private static final int TAB = 4;
@@ -25,7 +26,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: Writes JSON representation of workroom to file
+    // EFFECTS: Writes JSON representation of profile to file
     public void write(Profile profile) {
         JSONObject json = profile.toJson();
         saveToFile(json.toString(TAB));
