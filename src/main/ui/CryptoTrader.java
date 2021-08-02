@@ -255,7 +255,12 @@ public class CryptoTrader {
     public void performTrade(int takeIndex, int giveIndex) {
         try {
             Cryptocurrency cryptoToTake = this.market.get(takeIndex - 1);
+            if (cryptoToTake.equals(this.profile.getCryptoWallet().get(giveIndex - 1))) {
+                System.out.println("\nTrade must be between two different cryptocurrencies.");
+                runCryptoTrader();
+            }
             this.profile.trade(giveIndex, cryptoToTake);
+            System.out.println("\nTrade successful!");
             runCryptoTrader();
         } catch (InvalidSelectionException e) {
             System.out.println("Please select a valid option.");

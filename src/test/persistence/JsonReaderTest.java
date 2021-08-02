@@ -18,7 +18,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderNonExistentFile() {
-        JsonReader reader = new JsonReader("./data/dogeToTheMoon.json");
+        JsonReader reader = new JsonReader("./data/test/dogeToTheMoon.json");
         try {
             reader.read();
             fail("IOException expected");
@@ -29,7 +29,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderEmptyWorkRoom() {
-        JsonReader reader = new JsonReader("./data/jsonReaderTestEmptyCryptoWallet.json");
+        JsonReader reader = new JsonReader("./data/test/jsonReaderTestEmptyCryptoWallet.json");
         try {
             Profile profile = reader.read();
             assertEquals("Python", profile.getName());
@@ -41,7 +41,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderGeneralWorkRoom() {
-        JsonReader reader = new JsonReader("./data/jsonReaderTestNormalCryptoWallet.json");
+        JsonReader reader = new JsonReader("./data/test/jsonReaderTestNormalCryptoWallet.json");
         try {
             Profile profile = reader.read();
             assertEquals("Python", profile.getName());

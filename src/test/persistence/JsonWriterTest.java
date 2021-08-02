@@ -30,12 +30,12 @@ class  JsonWriterTest extends JsonTest {
     void testWriterEmptyWorkroom() {
         try {
             Profile profile = new Profile("DogeLover123", 1000000);
-            JsonWriter writer = new JsonWriter("./data/jsonWriterTestEmptyCryptowallet.json");
+            JsonWriter writer = new JsonWriter("./data/test/jsonWriterTestEmptyCryptowallet.json");
             writer.open();
             writer.write(profile);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/jsonWriterTestEmptyCryptowallet.json");
+            JsonReader reader = new JsonReader("./data/test/jsonWriterTestEmptyCryptowallet.json");
             profile = reader.read();
             assertEquals("DogeLover123", profile.getName());
             assertEquals(1000000, profile.getBalance());
@@ -55,12 +55,12 @@ class  JsonWriterTest extends JsonTest {
             profile.getCryptoWallet().add(safemoon);
             profile.getCryptoWallet().add(shibainu);
             profile.getCryptoWallet().add(stellar);
-            JsonWriter writer = new JsonWriter("./data/jsonWriterTestNormalCryptoWallet.json");
+            JsonWriter writer = new JsonWriter("./data/test/jsonWriterTestNormalCryptoWallet.json");
             writer.open();
             writer.write(profile);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/jsonWriterTestNormalCryptoWallet.json");
+            JsonReader reader = new JsonReader("./data/test/jsonWriterTestNormalCryptoWallet.json");
             profile = reader.read();
             assertEquals("BearMarketComingSoon", profile.getName());
             assertEquals(250, profile.getBalance());
