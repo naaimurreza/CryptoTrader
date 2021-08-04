@@ -55,6 +55,14 @@
       "price": 0.92695000,
       "volume": 253968.67969872,
       "change": -0.00427000
+    },
+    {
+      "name": "Pokadot",
+      "base": "DOT",
+      "target": "CAD",
+      "price": 21.44880418,
+      "volume": "",
+      "change": 0.27796693
     }
   ]
 }

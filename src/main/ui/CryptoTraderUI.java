@@ -17,7 +17,7 @@ import java.util.Scanner;
 /*
   Represents a CryptoTrader game
  */
-public class CryptoTrader {
+public class CryptoTraderUI {
     private static final String JSON_STORE = "./data/profile.json";
     private static final String JSON_MARKET = "./data/cryptoMarket.json";
     private Profile profile;
@@ -30,7 +30,8 @@ public class CryptoTrader {
 
     // MODIFIES: this
     // EFFECTS: runs the profile UI
-    public CryptoTrader() {
+    public CryptoTraderUI() {
+        new CryptoTraderGUI();
         JsonReader jsonReaderProfile = new JsonReader(JSON_STORE);
         JsonReader jsonReaderMarket = new JsonReader(JSON_MARKET);
         jsonWriter = new JsonWriter(JSON_STORE);
