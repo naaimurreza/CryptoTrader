@@ -45,8 +45,14 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
     public CryptoTraderGUI() {
         super("CryptoTrader");
         setResizable(false);
+        setLayout(new BorderLayout());
+        GradientPanel panel = new GradientPanel();
+        panel.setSize(WIDTH, HEIGHT);
+        panel.setLayout(new BorderLayout());
+        add(panel);
+        pack();
         initializeFields();
-        initializeGraphics();
+        initializeGraphics(panel);
 
     }
 
@@ -65,19 +71,15 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
         }
     }
 
-    private void initializeGraphics() {
-        setLayout(new BorderLayout());
+    private void initializeGraphics(JPanel panel) {
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-
-        GradientPanel panel = new GradientPanel();
-        panel.setSize(WIDTH, HEIGHT);
-        this.add(panel);
-
         initializeLabel(panel);
         initializeButton(panel);
+        panel.add(new JLabel(""));
+        this.add(new JLabel(""));
     }
 
     public void initializeButton(JPanel panel) {
@@ -133,6 +135,7 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
         panel.add(sellButton);
         panel.add(tradeButton);
         panel.add(quitButton);
+
     }
 
     public void initializeLabel(JPanel panel) {
