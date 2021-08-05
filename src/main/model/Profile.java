@@ -35,7 +35,7 @@ public class Profile implements Writable {
     }
 
     public double getBalance() {
-        return balance;
+        return this.balance;
     }
 
     public String getName() {

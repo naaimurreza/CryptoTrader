@@ -16,7 +16,7 @@ public class Cryptocurrency implements Writable {
     private double amount;
     private double price;
 
-    DecimalFormat decimalFormat = new DecimalFormat("####.0000");
+    DecimalFormat decimalFormat = new DecimalFormat("###0.0000");
 
     // EFFECTS: Constructs a cryptocurrency object with amount set to zero
     // REQUIRES: price >= 0

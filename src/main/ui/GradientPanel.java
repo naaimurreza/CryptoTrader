@@ -10,6 +10,10 @@ import java.awt.*;
 // Pink
 //    Color color1 = new Color(94, 114, 235);
 //     Color color2 = new Color(255, 145, 144);
+
+// pink-blue
+// Color color1 =  new Color(212, 65, 142, 252);
+// Color color2 =  new Color(6, 82, 197, 158);
 public class GradientPanel extends JPanel {
 
     public GradientPanel() {
@@ -25,10 +29,11 @@ public class GradientPanel extends JPanel {
         int h = getHeight();
 //        Color color1 = new Color(110, 69, 225);
 //        Color color2 = new Color(137, 212, 207);
-        Color color1 = new Color(189, 195, 199);
-        Color color2 = new Color(44, 62, 80);
-        GradientPaint gp = new GradientPaint(0, -250, color1, 0, h, color2);
+        Color color1 = Color.WHITE; // new Color(56, 0, 54, 201); // new Color(189, 195, 199);
+        Color color2 = new Color(4, 93, 233); // new Color(12, 186, 186, 154); // new Color(44, 62, 80);
+        GradientPaint gp = new GradientPaint(0, 15, color1, 0, h, color2);
         g2d.setPaint(gp);
         g2d.fillRect(0, 0, w, h);
+
     }
 }

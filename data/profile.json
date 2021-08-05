@@ -1,54 +1,42 @@
 {
-    "balance": 356410.2447999999,
-    "name": "Naaimur",
+    "balance": 356409.95259999996,
+    "name": "Python",
     "cryptowallet": [
         {
-            "amount": 10,
-            "price": 48106.99113968681,
+            "amount": 12,
+            "price": 44238.41482303311,
             "cryptoName": "Bitcoin",
             "cryptoCode": "BTC"
         },
         {
-            "amount": 20,
-            "price": 2851.5546661468006,
+            "amount": 25,
+            "price": 2898.269439237575,
             "cryptoName": "Ethereum",
             "cryptoCode": "ETH"
         },
         {
             "amount": 100,
-            "price": 193.34851734326668,
+            "price": 131.6846417949669,
             "cryptoName": "Litecoin",
             "cryptoCode": "LTC"
         },
         {
             "amount": 1000,
-            "price": 1.4443271116046612,
+            "price": 2.190712540700039,
             "cryptoName": "Cardano",
             "cryptoCode": "ADA"
         },
         {
-            "amount": 1,
-            "price": 0.2537157973849341,
+            "amount": 10000,
+            "price": 0.2449786121988926,
             "cryptoName": "Dogecoin",
             "cryptoCode": "DOGE"
         },
         {
-            "amount": 1,
-            "price": 1.3578120910388478,
+            "amount": 2000,
+            "price": 0.6849153049010173,
             "cryptoName": "Tether",
             "cryptoCode": "USDT"
-        },
-        {
-            "amount": 1,
-            "price": 0.9200152408289064,
-            "cryptoName": "Ripple",
-            "cryptoCode": "XRP"
-        },
-        {
-            "amount": 1,
-            "price": 19.260879028248823,
-            "cryptoName": "Pokadot",
-            "cryptoCode": "DOT"
         }
     ]
 }
