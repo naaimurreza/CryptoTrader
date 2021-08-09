@@ -11,6 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+
+/*
+  Represents a buy frame for CryptoTrader
+ */
 public class BuyFrame extends JFrame implements ActionListener {
     private static final int WIDTH = 400;
     private static final int HEIGHT = 500;
@@ -19,6 +23,7 @@ public class BuyFrame extends JFrame implements ActionListener {
     private final List<Cryptocurrency> market;
 
 
+    // EFFECTS: constructs a new buy frame.
     public BuyFrame(Profile profile, List<Cryptocurrency> market) {
         super("CryptoMarket");
         this.profile = profile;
@@ -41,6 +46,15 @@ public class BuyFrame extends JFrame implements ActionListener {
         displayMarket(panel);
     }
 
+
+    // EFFECTS: Getter for profile.
+    public Profile getProfile() {
+        return profile;
+    }
+
+
+    // MODIFIES: panel, this
+    // EFFECTS: Displays the market
     public void displayMarket(JPanel panel) {
         int position = 20;
         int index = 1;
@@ -61,12 +75,13 @@ public class BuyFrame extends JFrame implements ActionListener {
             position += 55;
             index++;
         }
-        JLabel placeHolder = new JLabel("");
-        panel.add(placeHolder);
+        panel.add(new JLabel(""));
         setLocation(1020, 176);
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: Handles the event when user selects a cryptocurrency and performs the buy operation
     @Override
     public void actionPerformed(ActionEvent e) {
         int index = Integer.parseInt(e.getActionCommand());

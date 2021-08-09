@@ -1,40 +1,40 @@
 {
-    "balance": 356409.95259999996,
+    "balance": 328977.78959999996,
     "name": "Python",
     "cryptowallet": [
         {
             "amount": 12,
-            "price": 44238.41482303311,
+            "price": 48166.23238014849,
             "cryptoName": "Bitcoin",
             "cryptoCode": "BTC"
         },
         {
-            "amount": 25,
-            "price": 2898.269439237575,
+            "amount": 35,
+            "price": 2855.0662063962473,
             "cryptoName": "Ethereum",
             "cryptoCode": "ETH"
         },
         {
             "amount": 100,
-            "price": 131.6846417949669,
+            "price": 106.18939960751004,
             "cryptoName": "Litecoin",
             "cryptoCode": "LTC"
         },
         {
             "amount": 1000,
-            "price": 2.190712540700039,
+            "price": 1.5983273800534739,
             "cryptoName": "Cardano",
             "cryptoCode": "ADA"
         },
         {
-            "amount": 10000,
-            "price": 0.2449786121988926,
+            "amount": 10005,
+            "price": 0.28006612920167867,
             "cryptoName": "Dogecoin",
             "cryptoCode": "DOGE"
         },
         {
             "amount": 2000,
-            "price": 0.6849153049010173,
+            "price": 0.7457272117129802,
             "cryptoName": "Tether",
             "cryptoCode": "USDT"
         }
