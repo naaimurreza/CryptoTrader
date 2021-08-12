@@ -21,3 +21,21 @@ helpful.
 - As a user, I want to be able to start a new profile with a new name and balance.  
 - As a user, I want to be able to close the application and have my data automatically saved to file.
 - As a user, I want to be able to open the application and have my data automatically loaded from file.
+
+
+### Phase 4: Task 2
+**Java language construct added:** Throwing a checked exception.
+
+In Profile class, the method buy() throws InsufficientBalanceException and InvalidAmountException. The method sell() 
+throws InvalidSelectionException and InvalidAmountException and finally the method trade() throws InvalidSelectionException 
+and all these exceptions are caught appropriately in the classes in the ui package. They are also tested correctly 
+in the ProfileTest 
+class.
+
+### Phase 4: Task 3
+Improvement to my design:
+
+- There is duplicated code in my BuyFrame, SellFrame, TradeFrame and WalletFrame class that I can refactor and put in 
+  the Frame superclass.
+  
+
