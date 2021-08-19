@@ -4,12 +4,10 @@ import model.Profile;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 
 
-public class WalletFrame extends Frame implements ActionListener {
+public class WalletFrame extends Frame {
 
     DecimalFormat decimalFormat = new DecimalFormat("###0.0000");
 
@@ -55,12 +53,4 @@ public class WalletFrame extends Frame implements ActionListener {
 
     }
 
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("back")) {
-            this.dispose();
-            new CryptoTraderGUI();
-        }
-    }
 }
