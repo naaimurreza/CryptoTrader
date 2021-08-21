@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 /*
   Represents a sell frame for CryptoTrader
@@ -16,6 +17,8 @@ import java.awt.event.ActionListener;
 public class SellFrame extends Frame implements ActionListener {
     private final CryptoTraderGUI cryptoTraderGUI;
     private final Profile profile;
+
+    DecimalFormat decimalFormat = new DecimalFormat("###0.00000000000");
 
     // EFFECTS: Constructs a sell frame.
     public SellFrame(Profile profile, CryptoTraderGUI cryptoTraderGUI) {
@@ -79,7 +82,7 @@ public class SellFrame extends Frame implements ActionListener {
                     + amount + " "
                     + sellCrypto.getCryptoCode()
                     + " for $" + (amount * sellCrypto.getPrice()));
-            cryptoTraderGUI.setBalanceLabel("Balance: $" + this.profile.getBalance());
+            cryptoTraderGUI.setBalanceLabel("Balance: $" + decimalFormat.format(this.profile.getBalance()));
             new WalletFrame(profile);
             dispose();
         } catch (InvalidAmountException exception) {

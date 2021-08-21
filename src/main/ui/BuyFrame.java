@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.List;
 
 
@@ -22,6 +23,8 @@ public class BuyFrame extends JFrame implements ActionListener {
     private final Profile profile;
     private final List<Cryptocurrency> market;
     private final CryptoTraderGUI cryptoTraderGUI;
+
+    DecimalFormat decimalFormat = new DecimalFormat("###0.00000000000");
 
 
     // EFFECTS: constructs a new buy frame.
@@ -96,7 +99,7 @@ public class BuyFrame extends JFrame implements ActionListener {
                     + amount + " "
                     +  buyCrypto.getCryptoCode()
                     + " for $" + (amount * buyCrypto.getPrice()));
-            cryptoTraderGUI.setBalanceLabel("Balance: $" + this.profile.getBalance());
+            cryptoTraderGUI.setBalanceLabel("Balance: $" + decimalFormat.format(this.profile.getBalance()));
             if (cryptoTraderGUI.getWalletFrame() != null) {
                 cryptoTraderGUI.getWalletFrame().dispose();
             }
