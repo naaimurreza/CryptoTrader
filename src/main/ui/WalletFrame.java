@@ -15,12 +15,15 @@ public class WalletFrame extends Frame {
     public WalletFrame(Profile profile) {
         super("CryptoWallet");
         setLocation(19, 176);
+        setVisible(false);
 
         GradientPanel panel = new GradientPanel();
         panel.setLayout(new BorderLayout());
         this.add(panel);
 
         displayWallet(profile, panel);
+        new LoadingScreen();
+        setVisible(true);
     }
 
     public void displayWallet(Profile profile, JPanel panel) {

@@ -14,13 +14,14 @@ import java.awt.event.ActionListener;
   Represents a sell frame for CryptoTrader
  */
 public class SellFrame extends Frame implements ActionListener {
-
+    private final CryptoTraderGUI cryptoTraderGUI;
     private final Profile profile;
 
     // EFFECTS: Constructs a sell frame.
-    public SellFrame(Profile profile) {
+    public SellFrame(Profile profile, CryptoTraderGUI cryptoTraderGUI) {
         super("SellCrypto");
         this.profile = profile;
+        this.cryptoTraderGUI = cryptoTraderGUI;
 
         GradientPanel panel = new GradientPanel();
         panel.setLayout(new BorderLayout());
@@ -78,6 +79,7 @@ public class SellFrame extends Frame implements ActionListener {
                     + amount + " "
                     + sellCrypto.getCryptoCode()
                     + " for $" + (amount * sellCrypto.getPrice()));
+            cryptoTraderGUI.setBalanceLabel("Balance: $" + this.profile.getBalance());
             new WalletFrame(profile);
             dispose();
         } catch (InvalidAmountException exception) {

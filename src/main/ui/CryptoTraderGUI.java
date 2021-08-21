@@ -1,6 +1,7 @@
 package ui;
 
 import model.Cryptocurrency;
+import model.MarketReader;
 import model.Profile;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -11,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -21,21 +24,25 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
     private static final int HEIGHT = 500;
 
     private static final String JSON_STORE = "./data/profile.json";
-    private static final String JSON_MARKET = "./data/cryptoMarket.json";
     private JsonWriter jsonWriter;
     private Profile profile;
-    private List<Cryptocurrency> market;
+    private final List<Cryptocurrency> market = new ArrayList<>();
+
+    DecimalFormat decimalFormat = new DecimalFormat("###0.00000000000");
 
     private BuyFrame buyFrame;
     private WalletFrame walletFrame;
     private JLabel balanceLabel;
-
 
     ImageIcon buy = new ImageIcon("./data/icons/buy2.png");
     ImageIcon sell = new ImageIcon("./data/icons/sell3.png");
     ImageIcon trade = new ImageIcon("./data/icons/trade.png");
     ImageIcon wallet = new ImageIcon("./data/icons/wallet.png");
     ImageIcon quit = new ImageIcon("./data/icons/quit.png");
+
+    private final String[][] marketList = {{"BTC","Bitcoin"}, {"ETH", "Ethereum"},
+            {"LTC", "Litecoin"}, {"DOGE", "Dogecoin"}, {"ADA", "Cardano"},
+            {"USDT", "Tether"}, {"XRP", "Ripple"}, {"DOT", "Pokadot"}};
 
 
     // EFFECTS: Constructs the JFrame, creates a GradientPanel and initializes fields and graphics
@@ -53,17 +60,29 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
 
     }
 
+    public void setBalanceLabel(String text) {
+        this.balanceLabel.setText(text);
+    }
+
+    public WalletFrame getWalletFrame() {
+        return walletFrame;
+    }
+
+    public void setWalletFrame(WalletFrame walletFrame) {
+        this.walletFrame = walletFrame;
+    }
+
     // MODIFIES: this
     // EFFECTS: Initializes the fields
     private void initializeFields() {
         JsonReader jsonReaderProfile = new JsonReader(JSON_STORE);
-        JsonReader jsonReaderMarket = new JsonReader(JSON_MARKET);
         jsonWriter = new JsonWriter(JSON_STORE);
+        MarketReader marketReader = new MarketReader();
         try {
             this.profile = jsonReaderProfile.read();
-            this.market = jsonReaderMarket.readMarket();
-            JOptionPane.showMessageDialog(null, "Successfully loaded CryptoTrader!",
-                    "CryptoTrader", JOptionPane.INFORMATION_MESSAGE);
+            for (String[] code : this.marketList) {
+                this.market.add(marketReader.retrieveInfo(code[0], code[1], 0));
+            }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Failed to load CryptoTrader.",
                     "CryptoTrader", JOptionPane.ERROR_MESSAGE);
@@ -73,14 +92,14 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
     // MODIFIES: this, panel
     // initializes the labels and buttons for the main menu
     private void initializeGraphics(JPanel panel) {
+        initializeButtons(panel);
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
         initializeLabel(panel);
-        initializeButtons(panel);
+        add(new JLabel(""));
         panel.add(new JLabel(""));
-        this.add(new JLabel(""));
     }
 
 
@@ -161,7 +180,7 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
     public void initializeLabel(JPanel panel) {
         JLabel brandLabel = new JLabel("CryptoTrader©");
         JLabel welcomeText = new JLabel("CryptoMaster : " + this.profile.getName());
-        this.balanceLabel = new JLabel("Balance: $" + this.profile.getBalance());
+        this.balanceLabel = new JLabel("Balance: $" + decimalFormat.format(this.profile.getBalance()));
 
         balanceLabel.setBounds(110, 190, 400, 100);
         balanceLabel.setFont(new Font("Zapf Dingbats", Font.PLAIN, 25));
@@ -192,11 +211,13 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
             if (buyFrame != null) {
                 buyFrame.dispose();
             }
-            buyFrame = new BuyFrame(this.profile, market);
-            this.balanceLabel.setText("Balance: $" + this.profile.getBalance());
+            buyFrame = new BuyFrame(this.profile, market, this);
         } else if (e.getActionCommand().equals("sell")) {
-            new SellFrame(this.profile);
-            this.balanceLabel.setText("Balance: $" + this.profile.getBalance());
+            new SellFrame(this.profile, this);
+            if (walletFrame != null) {
+                walletFrame.dispose();
+            }
+            walletFrame = new WalletFrame(this.profile);
         } else if (e.getActionCommand().equals("trade")) {
             new TradeFrame(this.profile, market);
         } else if (e.getActionCommand().equals("quit")) {
@@ -212,8 +233,6 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
             jsonWriter.open();
             jsonWriter.write(profile);
             jsonWriter.close();
-            JOptionPane.showMessageDialog(null,"Auto-save complete!",
-                    "CryptoTrader",JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException exception) {
             JOptionPane.showMessageDialog(null, "Auto-save failed.", "CryptoTrader", JOptionPane.ERROR_MESSAGE);
         }

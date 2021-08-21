@@ -21,18 +21,19 @@ public class BuyFrame extends JFrame implements ActionListener {
 
     private final Profile profile;
     private final List<Cryptocurrency> market;
+    private final CryptoTraderGUI cryptoTraderGUI;
 
 
     // EFFECTS: constructs a new buy frame.
-    public BuyFrame(Profile profile, List<Cryptocurrency> market) {
+    public BuyFrame(Profile profile, List<Cryptocurrency> market, CryptoTraderGUI cryptoTraderGUI) {
         super("CryptoMarket");
         this.profile = profile;
         this.market = market;
+        this.cryptoTraderGUI = cryptoTraderGUI;
         setLayout(new BorderLayout());
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
         setDefaultCloseOperation(BuyFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
+        setVisible(false);
         setResizable(false);
         setLocation(1020, 176);
         GradientPanel panel = new GradientPanel();
@@ -40,10 +41,11 @@ public class BuyFrame extends JFrame implements ActionListener {
         add(panel);
         pack();
         setLocationRelativeTo(null);
-        setMinimumSize(new Dimension(WIDTH, HEIGHT));
-        setVisible(true);
+        pack();
 
         displayMarket(panel);
+        new LoadingScreen();
+        setVisible(true);
     }
 
 
@@ -77,7 +79,6 @@ public class BuyFrame extends JFrame implements ActionListener {
         }
         panel.add(new JLabel(""));
         setLocation(1020, 176);
-
     }
 
     // MODIFIES: this
@@ -95,7 +96,11 @@ public class BuyFrame extends JFrame implements ActionListener {
                     + amount + " "
                     +  buyCrypto.getCryptoCode()
                     + " for $" + (amount * buyCrypto.getPrice()));
-            new WalletFrame(profile);
+            cryptoTraderGUI.setBalanceLabel("Balance: $" + this.profile.getBalance());
+            if (cryptoTraderGUI.getWalletFrame() != null) {
+                cryptoTraderGUI.getWalletFrame().dispose();
+            }
+            cryptoTraderGUI.setWalletFrame(new WalletFrame(this.profile));
         } catch (InsufficientBalanceException exception) {
             JOptionPane.showMessageDialog(null, "Purchase failed due to insufficient balance.");
         } catch (InvalidAmountException | NullPointerException | NumberFormatException exception) {

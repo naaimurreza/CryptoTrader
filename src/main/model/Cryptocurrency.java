@@ -17,6 +17,7 @@ public class Cryptocurrency implements Writable {
     private double price;
 
     DecimalFormat decimalFormat = new DecimalFormat("###0.0000");
+    private MarketReader marketReader;
 
     // EFFECTS: Constructs a cryptocurrency object with amount set to zero
     // REQUIRES: price >= 0
@@ -71,18 +72,10 @@ public class Cryptocurrency implements Writable {
     }
 
     // MODIFIES: this
-    // EFFECTS: Increases the price of the cryptocurrency by 5% or decrease the price of the cryptocurrency by 5% with
-    //          the probability of each case being 1/2.
-    //          Tries to mimic the high volatility of the cryptocurrency market.
+    // EFFECTS: Gets current price of this
     public double getCurrentPrice() {
-        int randomInt = (int)Math.floor(Math.random() * 100);
-        double newPrice;
-        if (randomInt > 50) {
-            newPrice = this.getPrice() * 1.05;
-        } else {
-            newPrice = this.getPrice() * 0.95;
-        }
-        this.setPrice(newPrice);
+        this.marketReader = new MarketReader();
+        double newPrice = marketReader.retrieveInfo(this.cryptoCode, this.cryptoName, this.amount).getPrice();
         return Double.parseDouble(decimalFormat.format(newPrice));
     }
 
