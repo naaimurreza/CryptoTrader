@@ -2,35 +2,6 @@
     "balance": 827458.88459999995,
     "name": "Naaimur",
     "cryptowallet": [
-        {
-            "amount": 10,
-            "price": 62556.6,
-            "cryptoName": "Bitcoin",
-            "cryptoCode": "BTC"
-        },
-        {
-            "amount": 335,
-            "price": 0.27972166661688985,
-            "cryptoName": "Dogecoin",
-            "cryptoCode": "DOGE"
-        },
-        {
-            "amount": 45,
-            "price": 4172.05,
-            "cryptoName": "Ethereum",
-            "cryptoCode": "ETH"
-        },
-        {
-            "amount": 3000,
-            "price": 3.18600764,
-            "cryptoName": "Cardano",
-            "cryptoCode": "ADA"
-        },
-        {
-            "amount": 500,
-            "price": 1.28215336,
-            "cryptoName": "Tether",
-            "cryptoCode": "USDT"
-        }
+
     ]
 }
