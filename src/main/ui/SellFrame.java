@@ -83,7 +83,10 @@ public class SellFrame extends Frame implements ActionListener {
                     + sellCrypto.getCryptoCode()
                     + " for $" + (amount * sellCrypto.getPrice()));
             cryptoTraderGUI.setBalanceLabel("Balance: $" + decimalFormat.format(this.profile.getBalance()));
-            new WalletFrame(profile);
+            if (cryptoTraderGUI.getWalletFrame() != null) {
+                cryptoTraderGUI.getWalletFrame().dispose();
+            }
+            cryptoTraderGUI.setWalletFrame(new WalletFrame(this.profile));
             dispose();
         } catch (InvalidAmountException exception) {
             JOptionPane.showMessageDialog(null, "Please enter a valid amount.");
