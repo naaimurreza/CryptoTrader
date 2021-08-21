@@ -6,12 +6,12 @@ import java.awt.*;
 /*
   The frame superclass
  */
-public class Frame extends JFrame {
+public class FrameSuperclass extends JFrame {
     private static final int WIDTH = 400;
     private static final int HEIGHT = 500;
 
     // EFFECTS: Constructs a new frame object
-    public Frame(String title) {
+    public FrameSuperclass(String title) {
         super(title);
         setLayout(new BorderLayout());
         setMinimumSize(new Dimension(WIDTH, HEIGHT));

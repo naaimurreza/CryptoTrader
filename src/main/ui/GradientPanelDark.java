@@ -7,19 +7,12 @@ import java.awt.*;
   Represents a panel with gradients background color
   Citation: https://stackoverflow.com/questions/14364291/jpanel-gradient-background
  */
-public class GradientPanel extends JPanel {
+public class GradientPanelDark extends JPanel {
     private Color topColor;
     private Color bottomColor;
 
-    public GradientPanel() {
+    public GradientPanelDark() {
         super();
-    }
-
-    // EFFECTS: Constructs a gradientPanel object
-    public GradientPanel(Color topColor, Color bottomColor) {
-        super();
-        this.topColor = topColor;
-        this.bottomColor = bottomColor;
     }
 
 
@@ -31,8 +24,8 @@ public class GradientPanel extends JPanel {
         int height = getHeight();
         Graphics2D graphics2D = (Graphics2D) graphics;
         graphics2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        topColor = Color.WHITE;
-        bottomColor = new Color(4, 93, 233);
+        topColor = Color.BLACK;
+        bottomColor = Color.GRAY;
         GradientPaint gradientPaint = new GradientPaint(0, 15, topColor, 0, height, bottomColor);
         graphics2D.setPaint(gradientPaint);
         graphics2D.fillRect(0, 0, width, height);

@@ -9,10 +9,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Locale;
 
+/*
+ A market reader class for CryptoTrader
+ */
 public class MarketReader {
     private static HttpURLConnection connection;
 
-
+    // EFFECTS: Makes a GET request to the API and returns a cryptocurrency
     public Cryptocurrency retrieveInfo(String cryptoCode, String cryptoName, double amount) {
         BufferedReader reader;
         String line;
@@ -49,6 +52,7 @@ public class MarketReader {
         return parse(responseContent.toString(), cryptoCode, amount, cryptoName);
     }
 
+    // EFFECTS: Parses the JSON object returned from the GET request
     public Cryptocurrency parse(String responseBody, String cryptoCode, double amount, String cryptoName) {
         JSONObject data = new JSONObject(responseBody);
         JSONObject bodyJSON = data.getJSONObject("ticker");

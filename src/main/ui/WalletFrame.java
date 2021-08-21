@@ -7,7 +7,7 @@ import java.awt.*;
 import java.text.DecimalFormat;
 
 
-public class WalletFrame extends Frame {
+public class WalletFrame extends FrameSuperclass {
 
     DecimalFormat decimalFormat = new DecimalFormat("###0.0000");
     DecimalFormat amountFormat = new DecimalFormat("###0.0###");

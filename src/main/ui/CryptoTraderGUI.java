@@ -33,6 +33,7 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
     private BuyFrame buyFrame;
     private WalletFrame walletFrame;
     private JLabel balanceLabel;
+    private JPanel panel;
 
     ImageIcon buy = new ImageIcon("./data/icons/buy2.png");
     ImageIcon sell = new ImageIcon("./data/icons/sell3.png");
@@ -50,7 +51,8 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
         super("CryptoTrader");
         setResizable(false);
         setLayout(new BorderLayout());
-        GradientPanel panel = new GradientPanel();
+        setBackground(Color.black);
+        this.panel = new GradientPanel();
         panel.setSize(WIDTH, HEIGHT);
         panel.setLayout(new BorderLayout());
         add(panel);
@@ -111,6 +113,7 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
         JButton sellButton = new JButton("SellCrypto");
         JButton tradeButton = new JButton("TradeCrypto");
         JButton quitButton = new JButton("Quit");
+        JButton resetButton = new JButton("Reset profile");
 
         buyButton.setIcon(buy);
         buyButton.setHorizontalTextPosition(JButton.CENTER);
@@ -132,7 +135,7 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
         quitButton.setHorizontalTextPosition(JButton.CENTER);
         quitButton.setVerticalTextPosition(JButton.BOTTOM);
 
-        initializeButtonsHelper(quitButton, walletButton, buyButton, sellButton, tradeButton, panel);
+        initializeButtonsHelper(quitButton, walletButton, buyButton, sellButton, tradeButton, resetButton, panel);
 
     }
 
@@ -143,7 +146,12 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
                                         JButton buyButton,
                                         JButton sellButton,
                                         JButton tradeButton,
+                                        JButton resetButton,
                                         JPanel panel) {
+
+        resetButton.setActionCommand("reset");
+        resetButton.addActionListener(this);
+
         quitButton.setActionCommand("quit");
         quitButton.addActionListener(this);
 
@@ -164,7 +172,9 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
         sellButton.setBounds(250, 320, 96, 75);
         tradeButton.setBounds(350, 320, 96, 75);
         quitButton.setBounds(450, 320, 96, 75);
+        resetButton.setBounds(50, 400, 240, 40);
 
+        panel.add(resetButton);
         panel.add(walletButton);
         panel.add(buyButton);
         panel.add(sellButton);
@@ -222,6 +232,8 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
             new TradeFrame(this.profile, market, this);
         } else if (e.getActionCommand().equals("quit")) {
             quitButtonHelper();
+        } else if (e.getActionCommand().equals("reset")) {
+            // sdf
         }
     }
 

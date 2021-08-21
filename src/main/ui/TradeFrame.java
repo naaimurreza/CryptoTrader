@@ -13,7 +13,7 @@ import java.util.List;
 /*
   Represents a trade frame in CryptoTrader
  */
-public class TradeFrame extends Frame implements ActionListener {
+public class TradeFrame extends FrameSuperclass implements ActionListener {
     private final Profile profile;
     private final List<Cryptocurrency> market;
     private final JPanel panel;
@@ -31,7 +31,7 @@ public class TradeFrame extends Frame implements ActionListener {
 
     DecimalFormat decimalFormat = new DecimalFormat("###0.0000");
 
-    // EFFECTS: Constructs a trade frame.
+    // EFFECTS: Constructs a trade frame and displays it
     public TradeFrame(Profile profile, List<Cryptocurrency> market, CryptoTraderGUI cryptoTraderGUI) {
         super("TradeCrypto");
         this.profile = profile;
@@ -49,40 +49,46 @@ public class TradeFrame extends Frame implements ActionListener {
         displayTradeMenu();
     }
 
-    // MODIFIES: panel
+    // MODIFIES: this
     // EFFECTS: Displays the trade menu
     public void displayTradeMenu() {
-        initializeLabels();
-        initializeImages();
-        String[] options = new String[this.profile.getCryptoWallet().size()];
-        for (int i = 0; i < profile.getCryptoWallet().size(); i++) {
-            options[i] = profile.getCryptoWallet().get(i).getCryptoCode();
+        if (profile.getCryptoWallet().size() == 0) {
+            displayEmptyWallet(panel);
+        } else {
+            initializeLabels();
+            initializeImages();
+            String[] options = new String[this.profile.getCryptoWallet().size()];
+            for (int i = 0; i < profile.getCryptoWallet().size(); i++) {
+                options[i] = profile.getCryptoWallet().get(i).getCryptoCode();
+            }
+
+            giveComboBox = new JComboBox(options);
+            giveComboBox.setBounds(34, 200, 135, 20);
+            giveComboBox.addActionListener(this);
+
+            String[] marketList = new String[this.market.size()];
+            for (int i = 0; i < this.market.size(); i++) {
+                marketList[i] = this.market.get(i).getCryptoCode();
+            }
+
+            takeComboBox = new JComboBox(marketList);
+            takeComboBox.setBounds(230, 200, 135, 20);
+            takeComboBox.addActionListener(this);
+
+            JButton tradeButton = new JButton("TRADE");
+            tradeButton.setBounds(10, 240, 380, 50);
+            tradeButton.addActionListener(this);
+            tradeButton.setActionCommand("trade");
+
+            panel.add(tradeButton);
+            panel.add(takeComboBox);
+            panel.add(giveComboBox);
+            panel.add(new JLabel(""));
         }
-
-        giveComboBox = new JComboBox(options);
-        giveComboBox.setBounds(34, 200, 135, 20);
-        giveComboBox.addActionListener(this);
-
-        String[] marketList = new String[this.market.size()];
-        for (int i = 0; i < this.market.size(); i++) {
-            marketList[i] = this.market.get(i).getCryptoCode();
-        }
-
-        takeComboBox = new JComboBox(marketList);
-        takeComboBox.setBounds(230, 200, 135, 20);
-        takeComboBox.addActionListener(this);
-
-        JButton tradeButton = new JButton("TRADE");
-        tradeButton.setBounds(10, 240, 380, 50);
-        tradeButton.addActionListener(this);
-        tradeButton.setActionCommand("trade");
-
-        panel.add(tradeButton);
-        panel.add(takeComboBox);
-        panel.add(giveComboBox);
-        panel.add(new JLabel(""));
     }
 
+    // MODIFIES: this
+    // EFFECTS: Initializes the labels
     public void initializeLabels() {
         JLabel giveLabel = new JLabel("Give");
         giveLabel.setFont(new Font("Zapf Dingbats", Font.PLAIN, 25));
@@ -108,6 +114,8 @@ public class TradeFrame extends Frame implements ActionListener {
         panel.add(giveLabel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Initializes the images
     public void initializeImages() {
         givePic = new JLabel(new ImageIcon("./data/icons/"
                 + this.profile.getCryptoWallet().get(0).getCryptoCode() + "-big.png"));
@@ -121,7 +129,8 @@ public class TradeFrame extends Frame implements ActionListener {
         panel.add(givePic);
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: Handles the action when one cryptocurrency is traded for another
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == giveComboBox) {

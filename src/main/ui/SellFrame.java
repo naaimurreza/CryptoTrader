@@ -14,7 +14,7 @@ import java.text.DecimalFormat;
 /*
   Represents a sell frame for CryptoTrader
  */
-public class SellFrame extends Frame implements ActionListener {
+public class SellFrame extends FrameSuperclass implements ActionListener {
     private final CryptoTraderGUI cryptoTraderGUI;
     private final Profile profile;
 
