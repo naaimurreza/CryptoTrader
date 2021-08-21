@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 public class WalletFrame extends Frame {
 
     DecimalFormat decimalFormat = new DecimalFormat("###0.0000");
+    DecimalFormat amountFormat = new DecimalFormat("###0.0###");
 
 
     public WalletFrame(Profile profile) {
@@ -39,7 +40,7 @@ public class WalletFrame extends Frame {
                 roundedPanel.setBounds(25, position, 350, 50);
                 roundedPanel.setBackground(new Color(253, 253, 253, 77));
 
-                JLabel amountLabel = new JLabel("       " + amount);
+                JLabel amountLabel = new JLabel("       " + amountFormat.format(amount));
                 JLabel priceLabel = new JLabel("      $" + decimalFormat.format(price * amount));
 
                 JLabel nameLabel = new JLabel((i + 1) + ") " + profile.getCryptoWallet().get(i).getCryptoName());

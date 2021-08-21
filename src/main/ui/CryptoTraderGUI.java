@@ -219,7 +219,7 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
             }
             walletFrame = new WalletFrame(this.profile);
         } else if (e.getActionCommand().equals("trade")) {
-            new TradeFrame(this.profile, market);
+            new TradeFrame(this.profile, market, this);
         } else if (e.getActionCommand().equals("quit")) {
             quitButtonHelper();
         }

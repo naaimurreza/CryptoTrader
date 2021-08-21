@@ -34,8 +34,7 @@ public class Frame extends JFrame {
         panel.add(messageLabel);
         picLabel.setBounds(90,90,200,190);
 
-        JLabel placeHolder = new JLabel("");
-        panel.add(placeHolder);
+        panel.add(new JLabel(""));
     }
 
 

@@ -95,21 +95,16 @@ public class Profile implements Writable {
     // MODIFIES: this, takeCrypto
     // EFFECTS: Removes the cryptocurrency at index (giveIndex - 1) of the wallet and adds takeCrypto with an amount
     //          equivalent to the amount of cryptocurrency removed.
-    public void trade(int giveIndex, Cryptocurrency takeCrypto) throws InvalidSelectionException {
-        if (giveIndex <= this.cryptoWallet.size() && giveIndex > 0) {
-            Cryptocurrency giveCrypto = this.cryptoWallet.get(giveIndex - 1);
-            double givePrice = giveCrypto.getCurrentPrice() * giveCrypto.getAmount();
-            double getAmountCrypto = givePrice / takeCrypto.getCurrentPrice();
-            takeCrypto.addAmount(getAmountCrypto);
-            this.cryptoWallet.remove(giveCrypto);
-            if (!this.cryptoWallet.contains(takeCrypto)) {
-                this.cryptoWallet.add(takeCrypto);
-            } else {
-                Cryptocurrency takeCryptoNewInstance = getCrypto(this.cryptoWallet, takeCrypto);
-                takeCryptoNewInstance.addAmount(getAmountCrypto);
-            }
+    public void trade(Cryptocurrency giveCrypto, Cryptocurrency takeCrypto) {
+        double givePrice = giveCrypto.getCurrentPrice() * giveCrypto.getAmount();
+        double getAmountCrypto = givePrice / takeCrypto.getCurrentPrice();
+        takeCrypto.addAmount(getAmountCrypto);
+        this.cryptoWallet.remove(giveCrypto);
+        if (!this.cryptoWallet.contains(takeCrypto)) {
+            this.cryptoWallet.add(takeCrypto);
         } else {
-            throw new InvalidSelectionException();
+            Cryptocurrency takeCryptoNewInstance = getCrypto(this.cryptoWallet, takeCrypto);
+            takeCryptoNewInstance.addAmount(getAmountCrypto);
         }
     }
 

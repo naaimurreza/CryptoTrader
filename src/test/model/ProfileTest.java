@@ -147,32 +147,16 @@ class ProfileTest {
             richProfile.buy(ethereum, 10);
             richProfile.buy(bitcoin, 5);
             richProfile.buy(dogecoin, 1000);
-            richProfile.trade(4, litecoin);
-            fail();
-        } catch (InvalidSelectionException e) {
-            // pass
         } catch (InsufficientBalanceException | InvalidAmountException e) {
             fail();
         }
 
-        try {
-            richProfile.trade(2, litecoin);
-            richProfile.trade(2, ethereum);
-            assertFalse(richProfile.getCryptoWallet().contains(bitcoin));
-            assertTrue(richProfile.getCryptoWallet().contains(litecoin));
-            assertFalse(richProfile.getCryptoWallet().contains(dogecoin));
-            assertTrue(ethereum.getAmount() > 10);
-            // pass
-        } catch (InvalidSelectionException e) {
-            fail();
-        }
-
-        try {
-            richProfile.trade(-1, ethereum);
-            fail();
-        } catch (InvalidSelectionException e) {
-            // pass
-        }
+        richProfile.trade(dogecoin, litecoin);
+        richProfile.trade(dogecoin, ethereum);
+        assertFalse(richProfile.getCryptoWallet().contains(bitcoin));
+        assertTrue(richProfile.getCryptoWallet().contains(litecoin));
+        assertFalse(richProfile.getCryptoWallet().contains(dogecoin));
+        assertTrue(ethereum.getAmount() > 10);
     }
 
     @Test
