@@ -13,6 +13,7 @@ import java.text.DecimalFormat;
 
 /*
   Represents a sell frame for CryptoTrader
+   @author Naaimur Reza
  */
 public class SellFrame extends Frame implements ActionListener {
     private final CryptoTraderGUI cryptoTraderGUI;

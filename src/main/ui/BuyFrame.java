@@ -15,6 +15,7 @@ import java.util.List;
 
 /*
   Represents a buy frame for CryptoTrader
+   @author Naaimur Reza
  */
 public class BuyFrame extends JFrame implements ActionListener {
     private static final int WIDTH = 400;

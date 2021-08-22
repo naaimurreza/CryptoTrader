@@ -3,11 +3,15 @@ package ui;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+  Loading screen in CryptoTrader
+  @author Naaimur Reza
+ */
 public class LoadingScreen extends JFrame {
-
     JProgressBar bar = new JProgressBar();
     JLabel progressLabel = new JLabel(bar.getString());
 
+    // EFFECTS: Constructs a loading screen
     public LoadingScreen() {
         super("Loading...");
         setSize(400, 150);
@@ -36,6 +40,8 @@ public class LoadingScreen extends JFrame {
         fill();
     }
 
+    // MODIFIES: this
+    // EFFECTS: Fills up the loading bar
     public void fill() {
         int counter = 0;
         while (counter <= 100) {

@@ -5,6 +5,7 @@ import java.awt.*;
 
 /*
   The frame superclass
+   @author Naaimur Reza
  */
 public class Frame extends JFrame {
     private static final int WIDTH = 400;

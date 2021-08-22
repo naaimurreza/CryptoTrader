@@ -18,6 +18,7 @@ import java.util.List;
 
 /*
   Represents a CryptoTrader game with a GUI
+   @author Naaimur Reza
  */
 public class CryptoTraderGUI extends JFrame implements ActionListener {
     private static final int WIDTH = 600;
@@ -50,6 +51,7 @@ public class CryptoTraderGUI extends JFrame implements ActionListener {
         super("CryptoTrader");
         setResizable(false);
         setLayout(new BorderLayout());
+        setBackground(Color.BLACK);
         GradientPanel panel = new GradientPanel();
         panel.setSize(WIDTH, HEIGHT);
         panel.setLayout(new BorderLayout());

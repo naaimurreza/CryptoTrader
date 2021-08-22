@@ -6,13 +6,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.DecimalFormat;
 
-
+/*
+  Wallet frame for CryptoTrader
+   @author Naaimur Reza
+ */
 public class WalletFrame extends Frame {
-
     DecimalFormat decimalFormat = new DecimalFormat("###0.0000");
     DecimalFormat amountFormat = new DecimalFormat("###0.0###");
 
 
+    // EFFECTS: Constructs a wallet frame
     public WalletFrame(Profile profile) {
         super("CryptoWallet");
         setLocation(19, 176);
@@ -27,6 +30,8 @@ public class WalletFrame extends Frame {
         setVisible(true);
     }
 
+    // MODIFIES: this, pamel
+    // EFFECTS: Displays the wallet
     public void displayWallet(Profile profile, JPanel panel) {
         if (profile.getCryptoWallet().size() == 0) {
             displayEmptyWallet(panel);

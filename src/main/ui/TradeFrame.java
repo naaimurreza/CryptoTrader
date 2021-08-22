@@ -12,6 +12,7 @@ import java.util.List;
 
 /*
   Represents a trade frame in CryptoTrader
+   @author Naaimur Reza
  */
 public class TradeFrame extends Frame implements ActionListener {
     private final Profile profile;
@@ -141,9 +142,9 @@ public class TradeFrame extends Frame implements ActionListener {
         }
         if (e.getActionCommand().equals("trade")) {
             this.profile.trade(giveCrypto, takeCrypto);
-            JOptionPane.showMessageDialog(null, "Successfully traded "
-                    + decimalFormat.format(giveCrypto.getAmount()) + " " + giveCrypto.getCryptoCode() + " for "
-                    + decimalFormat.format(takeCrypto.getAmount()) + " " + takeCrypto.getCryptoCode() + "!");
+//            JOptionPane.showMessageDialog(null, "Successfully traded "
+//                    + decimalFormat.format(giveCrypto.getAmount()) + " " + giveCrypto.getCryptoCode() + " for "
+//                    + decimalFormat.format(takeAmount) + " " + takeCrypto.getCryptoCode() + "!");
             this.dispose();
             if (cryptoTraderGUI.getWalletFrame() != null) {
                 cryptoTraderGUI.getWalletFrame().dispose();
