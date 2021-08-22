@@ -1,6 +1,6 @@
 # CryptoTrader ©
 
-### The world's best cryptocurrency trading game
+### The world's best cryptocurrency trading simulator
 ***
 
 CryptoTrader © is a game that lets you try out cryptocurrency trading without the fear of losing a lot of money.

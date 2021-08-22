@@ -15,11 +15,11 @@ public class LoadingScreen extends JFrame {
     public LoadingScreen() {
         super("Loading...");
         setSize(400, 150);
-        setLayout(null);
+        setLayout(new BorderLayout());
         setLocationRelativeTo(null);
         setVisible(true);
 
-        GradientPanel gradientAnimation = new GradientPanel();
+        GradientPanel panel = new GradientPanel();
 
         bar.setValue(0);
         bar.setBounds(0, 50, 400, 30);
@@ -34,10 +34,11 @@ public class LoadingScreen extends JFrame {
         loadLabel.setFont(new Font("MV Boli", Font.PLAIN, 25));
         loadLabel.setBounds(147, 20, 400, 40);
 
-        gradientAnimation.add(loadLabel);
-        gradientAnimation.add(bar);
+        panel.add(loadLabel);
+        panel.add(bar);
 
         fill();
+        pack();
     }
 
     // MODIFIES: this
