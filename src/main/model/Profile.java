@@ -98,13 +98,11 @@ public class Profile implements Writable {
     public void trade(Cryptocurrency giveCrypto, Cryptocurrency takeCrypto) {
         double givePrice = giveCrypto.getCurrentPrice() * giveCrypto.getAmount();
         double getAmountCrypto = givePrice / takeCrypto.getCurrentPrice();
-        takeCrypto.addAmount(getAmountCrypto);
         this.cryptoWallet.remove(giveCrypto);
         if (!this.cryptoWallet.contains(takeCrypto)) {
             this.cryptoWallet.add(takeCrypto);
         } else {
-            Cryptocurrency takeCryptoNewInstance = getCrypto(this.cryptoWallet, takeCrypto);
-            takeCryptoNewInstance.addAmount(getAmountCrypto);
+            takeCrypto.addAmount(getAmountCrypto / 2);
         }
     }
 

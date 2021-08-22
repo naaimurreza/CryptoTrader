@@ -147,6 +147,7 @@ public class TradeFrame extends Frame implements ActionListener {
             takePic.setIcon(new ImageIcon("./data/icons/" + takeComboBox.getSelectedItem() + "-big.png"));
             double givePrice = giveCrypto.getCurrentPrice() * giveCrypto.getAmount();
             double amount = givePrice / takeCrypto.getCurrentPrice();
+            takeCrypto.setAmount(amount);
             takeAmount.setText(decimalFormat.format(amount));
         }
         if (e.getActionCommand().equals("trade")) {

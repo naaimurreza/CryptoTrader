@@ -12,6 +12,9 @@ Blockchain technology and cryptocurrencies fascinate me, and I believe they are 
 have had lost a lot of money trading with almost no strategy and having a game like this back then would have been
 helpful.
 
+[![CryptoTrader demo](https://img.youtube.com/vi/lmBl4x1qzeg/0.jpg)](https://www.youtube.com/watch?v=lmBl4x1qzeg)
+
+
 
 ### User Stories
 - As a user, I want to be able to buy and add a new cryptocurrency to my crypto wallet.
@@ -37,5 +40,7 @@ Improvement to my design:
 
 - There is duplicated code in my BuyFrame, SellFrame, TradeFrame and WalletFrame class that I can refactor and put in 
   the Frame superclass.
+  
+
   
 

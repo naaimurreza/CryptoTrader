@@ -53,8 +53,8 @@ public class Cryptocurrency implements Writable {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     // REQUIRES: amount > 0
@@ -76,6 +76,7 @@ public class Cryptocurrency implements Writable {
     public double getCurrentPrice() {
         this.marketReader = new MarketReader();
         double newPrice = marketReader.retrieveInfo(this.cryptoCode, this.cryptoName, this.amount).getPrice();
+        this.price = newPrice;
         return Double.parseDouble(decimalFormat.format(newPrice));
     }
 
